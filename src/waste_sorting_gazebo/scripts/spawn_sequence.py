@@ -1,60 +1,48 @@
 #!/usr/bin/env python3
-
+import os
 import rospy
-from gazebo_msgs.srv import SpawnModel, DeleteModel
-from geometry_msgs.msg import Pose
+import subprocess
+from gazebo_msgs.srv import DeleteModel
 
-class SpawnSequence:
-    def __init__(self):
-        rospy.init_node('spawn_sequence')
+STATE_FILE = os.path.expanduser("~/waste_sorting_ws/sequence_state.txt")
+COLORS = ["red", "green", "yellow"]
 
-        self.colors = ['red', 'green', 'yellow']
-        self.index = 0
+def read_index():
+    if not os.path.exists(STATE_FILE):
+        return 0
+    try:
+        with open(STATE_FILE, "r") as f:
+            return int(f.read().strip())
+    except:
+        return 0
 
-        rospy.wait_for_service('/gazebo/spawn_sdf_model')
-        rospy.wait_for_service('/gazebo/delete_model')
+def write_index(i):
+    with open(STATE_FILE, "w") as f:
+        f.write(str(i))
 
-        self.spawn_model = rospy.ServiceProxy('/gazebo/spawn_sdf_model', SpawnModel)
-        self.delete_model = rospy.ServiceProxy('/gazebo/delete_model', DeleteModel)
+if __name__ == "__main__":
+    rospy.init_node("spawn_sequence")
 
-    def get_model_info(self, color):
-        base = "/home/ertugrulbasoren/waste_sorting_ws/src/waste_sorting_gazebo/models"
+    rospy.wait_for_service("/gazebo/delete_model")
+    delete_model = rospy.ServiceProxy("/gazebo/delete_model", DeleteModel)
 
-        if color == 'red':
-            return f"{base}/trash_object_red/model.sdf", "trash_red"
-        elif color == 'green':
-            return f"{base}/trash_object_green/model.sdf", "trash_green"
-        elif color == 'yellow':
-            return f"{base}/trash_object_yellow/model.sdf", "trash_yellow"
-        else:
-            return None, None
+    for name in ["trash_red", "trash_green", "trash_yellow"]:
+        try:
+            delete_model(name)
+            rospy.loginfo("Deleted existing model: %s", name)
+        except:
+            pass
 
-    def delete_all_known_models(self):
-        for name in ['trash_red', 'trash_green', 'trash_yellow']:
-            try:
-                self.delete_model(name)
-                rospy.loginfo("Deleted existing model: %s", name)
-            except:
-                pass
+    idx = read_index()
+    color = COLORS[idx % len(COLORS)]
+    write_index((idx + 1) % len(COLORS))
 
-    def spawn_next(self):
-        color = self.colors[self.index]
-        model_path, model_name = self.get_model_info(color)
+    cmd = [
+        "rosrun",
+        "waste_sorting_gazebo",
+        "spawn_trash.py",
+        "_color:=" + color
+    ]
+    subprocess.call(cmd)
 
-        with open(model_path, 'r') as f:
-            model_xml = f.read()
-
-        pose = Pose()
-        pose.position.x = -0.8
-        pose.position.y = 0.0
-        pose.position.z = 0.2
-
-        self.spawn_model(model_name, model_xml, "", pose, "world")
-        rospy.loginfo("Spawned next object: %s", color)
-
-        self.index = (self.index + 1) % len(self.colors)
-
-if __name__ == '__main__':
-    spawner = SpawnSequence()
-    spawner.delete_all_known_models()
-    spawner.spawn_next()
+    rospy.loginfo("Spawned next object: %s", color)

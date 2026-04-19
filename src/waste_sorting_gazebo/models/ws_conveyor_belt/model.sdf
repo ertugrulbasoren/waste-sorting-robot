@@ -1,0 +1,58 @@
+<sdf version="1.6">
+  <model name="ws_conveyor_belt">
+    <static>true</static>
+
+    <link name="belt">
+      <pose>0 0 0 0 0 0</pose>
+
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>2.4 0.6 0.12</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>100.0</mu>
+              <mu2>100.0</mu2>
+              <fdir1>1 0 0</fdir1>
+              <slip1>0.0</slip1>
+              <slip2>0.0</slip2>
+            </ode>
+          </friction>
+          <bounce/>
+          <contact>
+            <ode>
+              <kp>1000000.0</kp>
+              <kd>100.0</kd>
+              <max_vel>1.0</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>2.4 0.6 0.12</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.15 0.15 0.15 1</ambient>
+          <diffuse>0.22 0.22 0.22 1</diffuse>
+          <specular>0.05 0.05 0.05 1</specular>
+        </material>
+      </visual>
+    </link>
+
+    <plugin name="conveyor_motion_plugin" filename="libconveyor_motion_plugin.so">
+      <belt_center>0 0 0.12</belt_center>
+      <belt_size>2.4 0.6 0.12</belt_size>
+      <belt_speed>0.22</belt_speed>
+      <top_margin>0.20</top_margin>
+      <lateral_damping>3.0</lateral_damping>
+    </plugin>
+  </model>
+</sdf>

@@ -1,0 +1,13 @@
+<launch>
+  <env name="PYTHONPATH" value="/home/ertugrulbasoren/.local/lib/python3.8/site-packages:$(optenv PYTHONPATH)" />
+
+  <node pkg="waste_sorting_gazebo"
+        type="yolo_detector.py"
+        name="yolo_detector"
+        output="screen">
+    <param name="image_topic" value="/top_camera/image_raw" />
+    <param name="model_path" value="/home/ertugrulbasoren/waste_sorting_ws/src/waste_sorting_gazebo/models_yolo/best.pt" />
+    <param name="conf_threshold" value="0.25" />
+    <param name="publish_annotated" value="true" />
+  </node>
+</launch>
