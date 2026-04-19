@@ -28,7 +28,16 @@ generate_messages(
 )
 
 catkin_package(
-  CATKIN_DEPENDS roscpp rospy std_msgs sensor_msgs geometry_msgs gazebo_ros gazebo_msgs cv_bridge message_runtime
+  CATKIN_DEPENDS
+    roscpp
+    rospy
+    std_msgs
+    sensor_msgs
+    geometry_msgs
+    gazebo_ros
+    gazebo_msgs
+    cv_bridge
+    message_runtime
 )
 
 include_directories(
@@ -42,24 +51,28 @@ add_library(conveyor_motion_plugin SHARED
   plugins/conveyor_motion_plugin.cpp
 )
 
-add_dependencies(conveyor_motion_plugin ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(conveyor_motion_plugin
+  ${${PROJECT_NAME}_EXPORTED_TARGETS}
+  ${catkin_EXPORTED_TARGETS}
+)
 
 target_link_libraries(conveyor_motion_plugin
   ${catkin_LIBRARIES}
   ${GAZEBO_LIBRARIES}
 )
 
-install(TARGETS conveyor_motion_plugin
-  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-)
-
 catkin_install_python(PROGRAMS
-  scripts/spawn_sequence.py
   scripts/spawn_trash.py
+  scripts/spawn_sequence.py
+  scripts/sim_detector.py
   scripts/yolo_detector.py
+  scripts/tracker_node.py
+  scripts/sort_executor.py
+  scripts/spawn_simple_arm.py
+  scripts/arm_pick_place.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
-install(DIRECTORY launch models worlds
+install(DIRECTORY launch models worlds msg
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )

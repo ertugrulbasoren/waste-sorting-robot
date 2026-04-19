@@ -1,0 +1,11 @@
+<launch>
+  <node pkg="waste_sorting_gazebo"
+        type="tracker_node.py"
+        name="tracker_node"
+        output="screen">
+    <param name="max_distance" value="80" />
+    <param name="track_timeout" value="0.8" />
+    <param name="pick_line_y" value="210" />
+    <param name="pick_tolerance" value="18" />
+  </node>
+</launch>

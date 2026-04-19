@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+print("SPAWN SEQUENCE STARTED")
 import os
 import rospy
 import subprocess
@@ -13,7 +14,7 @@ def read_index():
     try:
         with open(STATE_FILE, "r") as f:
             return int(f.read().strip())
-    except:
+    except Exception:
         return 0
 
 def write_index(i):
@@ -30,19 +31,18 @@ if __name__ == "__main__":
         try:
             delete_model(name)
             rospy.loginfo("Deleted existing model: %s", name)
-        except:
+        except Exception:
             pass
 
     idx = read_index()
     color = COLORS[idx % len(COLORS)]
     write_index((idx + 1) % len(COLORS))
 
-    cmd = [
+    subprocess.call([
         "rosrun",
         "waste_sorting_gazebo",
         "spawn_trash.py",
         "_color:=" + color
-    ]
-    subprocess.call(cmd)
+    ])
 
     rospy.loginfo("Spawned next object: %s", color)

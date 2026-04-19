@@ -1,0 +1,6 @@
+<launch>
+  <node pkg="waste_sorting_gazebo"
+        type="sort_executor.py"
+        name="sort_executor"
+        output="screen" />
+</launch>
