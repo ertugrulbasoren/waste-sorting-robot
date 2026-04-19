@@ -1,0 +1,25 @@
+<sdf version="1.6">
+  <model name="conveyor_belt">
+    <static>true</static>
+    <link name="belt">
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>2.4 0.6 0.12</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>2.4 0.6 0.12</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.2 0.2 0.2 1</ambient>
+          <diffuse>0.3 0.3 0.3 1</diffuse>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>

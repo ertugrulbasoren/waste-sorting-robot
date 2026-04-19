@@ -1,0 +1,4 @@
+waste_sorting_bringup
+/home/ertugrulbasoren/waste_sorting_ws/devel/.private/waste_sorting_bringup/share/waste_sorting_bringup/cmake/waste_sorting_bringupConfig.cmake /home/ertugrulbasoren/waste_sorting_ws/devel/share/waste_sorting_bringup/cmake/waste_sorting_bringupConfig.cmake
+/home/ertugrulbasoren/waste_sorting_ws/devel/.private/waste_sorting_bringup/share/waste_sorting_bringup/cmake/waste_sorting_bringupConfig-version.cmake /home/ertugrulbasoren/waste_sorting_ws/devel/share/waste_sorting_bringup/cmake/waste_sorting_bringupConfig-version.cmake
+/home/ertugrulbasoren/waste_sorting_ws/devel/.private/waste_sorting_bringup/lib/pkgconfig/waste_sorting_bringup.pc /home/ertugrulbasoren/waste_sorting_ws/devel/lib/pkgconfig/waste_sorting_bringup.pc

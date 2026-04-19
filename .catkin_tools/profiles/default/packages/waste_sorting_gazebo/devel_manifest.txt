@@ -1,0 +1,4 @@
+waste_sorting_gazebo
+/home/ertugrulbasoren/waste_sorting_ws/devel/.private/waste_sorting_gazebo/share/waste_sorting_gazebo/cmake/waste_sorting_gazeboConfig-version.cmake /home/ertugrulbasoren/waste_sorting_ws/devel/share/waste_sorting_gazebo/cmake/waste_sorting_gazeboConfig-version.cmake
+/home/ertugrulbasoren/waste_sorting_ws/devel/.private/waste_sorting_gazebo/share/waste_sorting_gazebo/cmake/waste_sorting_gazeboConfig.cmake /home/ertugrulbasoren/waste_sorting_ws/devel/share/waste_sorting_gazebo/cmake/waste_sorting_gazeboConfig.cmake
+/home/ertugrulbasoren/waste_sorting_ws/devel/.private/waste_sorting_gazebo/lib/pkgconfig/waste_sorting_gazebo.pc /home/ertugrulbasoren/waste_sorting_ws/devel/lib/pkgconfig/waste_sorting_gazebo.pc
