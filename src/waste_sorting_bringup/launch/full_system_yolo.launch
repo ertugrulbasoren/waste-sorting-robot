@@ -1,0 +1,59 @@
+<launch>
+  <!-- Gazebo -->
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+
+  <!-- YOLO parametreleri -->
+  <arg name="image_topic" default="/top_camera/image_raw"/>
+  <arg name="model_path" default="$(find waste_sorting_gazebo)/models_yolo/best.pt"/>
+  <arg name="conf_threshold" default="0.25"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find waste_sorting_gazebo)/worlds/waste_sorting.world"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="headless" value="$(arg headless)"/>
+    <arg name="debug" value="$(arg debug)"/>
+  </include>
+
+  <param name="/use_sim_time" value="true"/>
+
+  <node pkg="waste_sorting_gazebo"
+        type="spawn_simple_arm.py"
+        name="spawn_simple_arm"
+        output="screen"/>
+
+  <node pkg="waste_sorting_gazebo"
+        type="spawn_sequence.py"
+        name="spawn_sequence"
+        output="screen"/>
+
+  <node pkg="waste_sorting_gazebo"
+        type="yolo_detector.py"
+        name="yolo_detector"
+        output="screen">
+    <param name="image_topic" value="$(arg image_topic)"/>
+    <param name="model_path" value="$(arg model_path)"/>
+    <param name="conf_threshold" value="$(arg conf_threshold)"/>
+    <param name="publish_annotated" value="true"/>
+  </node>
+
+  <node pkg="waste_sorting_gazebo"
+        type="tracker_node.py"
+        name="tracker_node"
+        output="screen">
+    <param name="max_distance" value="80"/>
+    <param name="track_timeout" value="0.8"/>
+    <param name="pick_line_y" value="210"/>
+    <param name="pick_tolerance" value="18"/>
+  </node>
+
+  <node pkg="waste_sorting_gazebo"
+        type="arm_pick_place.py"
+        name="arm_pick_place"
+        output="screen"/>
+</launch>

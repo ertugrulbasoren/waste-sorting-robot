@@ -67,11 +67,12 @@
         </visual>
       </link>
 
-      <plugin name="conveyor_motion_plugin" filename="/home/ertugrulbasoren/waste_sorting_ws/devel/lib/libconveyor_motion_plugin.so">
+      <plugin name="conveyor_motion_plugin" filename="libconveyor_motion_plugin.so">
         <belt_center>0 0 0.18</belt_center>
         <belt_size>2.4 0.6 0.12</belt_size>
         <belt_speed>0.22</belt_speed>
         <top_margin>0.20</top_margin>
+        <min_object_z>0.11</min_object_z>
       </plugin>
     </model>
 

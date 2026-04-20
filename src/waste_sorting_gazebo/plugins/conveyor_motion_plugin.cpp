@@ -54,7 +54,7 @@ private:
     const double x_max = belt_center_.X() + belt_size_.X() * 0.5;
     const double y_min = belt_center_.Y() - belt_size_.Y() * 0.5;
     const double y_max = belt_center_.Y() + belt_size_.Y() * 0.5;
-    const double z_min = belt_center_.Z() - 0.06;
+    const double z_min = belt_center_.Z() - 0.08;
     const double z_max = belt_center_.Z() + top_margin_;
 
     for (auto const &m : world_->Models())

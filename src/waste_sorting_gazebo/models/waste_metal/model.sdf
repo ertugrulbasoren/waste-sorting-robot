@@ -1,0 +1,65 @@
+<sdf version="1.6">
+  <model name="waste_metal">
+    <pose>0 0 0 0 0 0</pose>
+    <link name="body">
+      <inertial>
+        <mass>0.09</mass>
+        <inertia>
+          <ixx>0.00006</ixx>
+          <iyy>0.00006</iyy>
+          <izz>0.00003</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+
+      <collision name="collision">
+        <pose>0 0 0.040 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.024</radius>
+            <length>0.07</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>10.0</mu>
+              <mu2>10.0</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+
+      <visual name="visual_body">
+        <pose>0 0 0.040 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.024</radius>
+            <length>0.07</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.75 0.75 0.78 1</ambient>
+          <diffuse>0.75 0.75 0.78 1</diffuse>
+          <specular>0.95 0.95 0.95 1</specular>
+        </material>
+      </visual>
+
+      <visual name="visual_top">
+        <pose>0 0 0.071 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.020</radius>
+            <length>0.004</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.90 0.90 0.92 1</ambient>
+          <diffuse>0.90 0.90 0.92 1</diffuse>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>

@@ -2,7 +2,6 @@
 import os
 import sys
 
-sys.path.append('/home/ertugrulbasoren/.local/lib/python3.8/site-packages')
 
 import cv2
 import rospy
@@ -19,10 +18,7 @@ class YoloDetectorNode:
         self.bridge = CvBridge()
 
         self.image_topic = rospy.get_param("~image_topic", "/top_camera/image_raw")
-        self.model_path = rospy.get_param(
-            "~model_path",
-            "/home/ertugrulbasoren/waste_sorting_ws/src/waste_sorting_gazebo/models_yolo/best.pt"
-        )
+        self.model_path = rospy.get_param("~model_path")
         self.conf_threshold = float(rospy.get_param("~conf_threshold", 0.25))
         self.publish_annotated = bool(rospy.get_param("~publish_annotated", True))
 

@@ -1,0 +1,8 @@
+path: /home/ertugrulbasoren/waste_sorting_ws/datasets/waste_yolo
+train: images/train
+val: images/val
+
+names:
+  0: red
+  1: green
+  2: yellow

@@ -101,6 +101,13 @@ class ArmPickPlace:
 
             rospy.loginfo("ARM SORT DONE: %s", class_name)
 
+            import subprocess
+            subprocess.Popen([
+                "rosrun",
+                "waste_sorting_gazebo",
+                "spawn_sequence.py"
+                  ])
+
         except Exception as e:
             rospy.logerr("Arm sequence failed: %s", str(e))
 
