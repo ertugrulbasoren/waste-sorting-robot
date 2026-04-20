@@ -13,8 +13,8 @@ class TrackerNode:
 
         self.max_distance = int(rospy.get_param("~max_distance", 80))
         self.track_timeout = float(rospy.get_param("~track_timeout", 0.8))
-        self.pick_line_y = int(rospy.get_param("~pick_line_y", 210))
-        self.pick_tolerance = int(rospy.get_param("~pick_tolerance", 18))
+        self.pick_line_x = int(rospy.get_param("~pick_line_x", 970))
+        self.pick_tolerance = int(rospy.get_param("~pick_tolerance", 120))
 
         self.next_track_id = 1
         self.tracks = {}
@@ -88,7 +88,7 @@ class TrackerNode:
         self.track_pub.publish(json.dumps(tracked_msg))
 
         if not track["picked"]:
-            if abs(track["center_y"] - self.pick_line_y) <= self.pick_tolerance:
+            if abs(track["center_x"] - self.pick_line_x) <= self.pick_tolerance:
                 track["picked"] = True
 
                 pick_msg = {
@@ -96,7 +96,7 @@ class TrackerNode:
                     "class_name": track["class_name"],
                     "center_x": track["center_x"],
                     "center_y": track["center_y"],
-                    "pick_line_y": self.pick_line_y
+                    "pick_line_x": self.pick_line_x
                 }
 
                 self.pick_pub.publish(json.dumps(pick_msg))

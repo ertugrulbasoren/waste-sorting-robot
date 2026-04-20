@@ -1,69 +1,41 @@
 #!/usr/bin/env python3
+import os
 import rospy
 from gazebo_msgs.srv import SpawnModel, DeleteModel
 from geometry_msgs.msg import Pose
 
-BOX_SDF_TEMPLATE = """
-<sdf version='1.6'>
-  <model name='{name}'>
-    <static>false</static>
-    <link name='link'>
-      <inertial>
-        <mass>0.1</mass>
-        <inertia>
-          <ixx>0.0001</ixx>
-          <iyy>0.0001</iyy>
-          <izz>0.0001</izz>
-          <ixy>0.0</ixy>
-          <ixz>0.0</ixz>
-          <iyz>0.0</iyz>
-        </inertia>
-      </inertial>
-      <collision name='collision'>
-        <geometry>
-          <box>
-            <size>0.06 0.06 0.06</size>
-          </box>
-        </geometry>
-        <surface>
-          <friction>
-            <ode>
-              <mu>10.0</mu>
-              <mu2>10.0</mu2>
-            </ode>
-          </friction>
-        </surface>
-      </collision>
-      <visual name='visual'>
-        <geometry>
-          <box>
-            <size>0.06 0.06 0.06</size>
-          </box>
-        </geometry>
-        <material>
-          <ambient>{r} {g} {b} 1</ambient>
-          <diffuse>{r} {g} {b} 1</diffuse>
-        </material>
-      </visual>
-    </link>
-  </model>
-</sdf>
-"""
+MODEL_BASE_PATH = os.path.expanduser("~/waste_sorting_ws/src/waste_sorting_gazebo/models")
 
-def get_color(color_name):
-    if color_name == "red":
-        return (1, 0, 0)
-    if color_name == "green":
-        return (0, 1, 0)
-    if color_name == "yellow":
-        return (1, 1, 0)
-    return (0, 1, 0)
+MODEL_INFO = {
+    "plastic": {
+        "model_name": "waste_plastic",
+        "model_dir": "waste_plastic"
+    },
+    "metal": {
+        "model_name": "waste_metal",
+        "model_dir": "waste_metal"
+    },
+    "paper": {
+        "model_name": "waste_paper",
+        "model_dir": "waste_paper"
+    }
+}
+def load_model_sdf(model_dir_name):
+    model_path = os.path.join(MODEL_BASE_PATH, model_dir_name, "model.sdf")
+    with open(model_path, "r") as f:
+        return f.read()
 
 if __name__ == "__main__":
     rospy.init_node("spawn_trash")
 
-    color = rospy.get_param("~color", "green")
-    model_name = f"trash_{color}"
+    waste_type = rospy.get_param("~waste_type", "plastic")
+
+    if waste_type not in MODEL_INFO:
+        rospy.logerr("Unknown waste_type: %s", waste_type)
+        raise SystemExit(1)
+
+    model_name = MODEL_INFO[waste_type]["model_name"]
+    model_dir = MODEL_INFO[waste_type]["model_dir"]
 
     rospy.wait_for_service("/gazebo/delete_model")
     rospy.wait_for_service("/gazebo/spawn_sdf_model")
@@ -76,14 +48,16 @@ if __name__ == "__main__":
     except Exception:
         pass
 
-    r, g, b = get_color(color)
-    model_xml = BOX_SDF_TEMPLATE.format(name=model_name, r=r, g=g, b=b)
+    model_xml = load_model_sdf(model_dir)
 
     pose = Pose()
     pose.position.x = -0.6
     pose.position.y = 0.0
     pose.position.z = 0.25
+    pose.orientation.x = 0.0
+    pose.orientation.y = 0.0
+    pose.orientation.z = 0.0
     pose.orientation.w = 1.0
 
     spawn_model(model_name, model_xml, "", pose, "world")
-    rospy.loginfo("Spawned %s as %s", color, model_name)
+    rospy.loginfo("Spawned %s as %s", waste_type, model_name)

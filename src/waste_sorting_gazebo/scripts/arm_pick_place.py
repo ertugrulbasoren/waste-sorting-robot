@@ -16,9 +16,9 @@ class ArmPickPlace:
         self.gripper_model = "simple_sort_gripper"
 
         self.model_map = {
-            "red": "trash_red",
-            "green": "trash_green",
-            "yellow": "trash_yellow"
+            "plastic": "waste_plastic",
+            "metal": "waste_metal",
+            "paper": "waste_paper"
         }
 
         self.pick_pos = {"x": 0.62, "y": 0.00, "z": 0.24}
@@ -26,15 +26,15 @@ class ArmPickPlace:
         self.lift_pos = {"x": 0.95, "y": -0.10, "z": 0.60}
 
         self.place_pos = {
-            "red":    {"x": 1.50, "y": -0.45, "z": 0.42},
-            "green":  {"x": 1.50, "y":  0.00, "z": 0.42},
-            "yellow": {"x": 1.50, "y":  0.45, "z": 0.42}
+            "plastic": {"x": 1.50, "y": -0.45, "z": 0.42},
+            "metal":   {"x": 1.50, "y":  0.00, "z": 0.42},
+            "paper":   {"x": 1.50, "y":  0.45, "z": 0.42}
         }
 
         self.place_hover = {
-            "red":    {"x": 1.40, "y": -0.45, "z": 0.60},
-            "green":  {"x": 1.40, "y":  0.00, "z": 0.60},
-            "yellow": {"x": 1.40, "y":  0.45, "z": 0.60}
+            "plastic": {"x": 1.40, "y": -0.45, "z": 0.60},
+            "metal":   {"x": 1.40, "y":  0.00, "z": 0.60},
+            "paper":   {"x": 1.40, "y":  0.45, "z": 0.60}
         }
 
         self.home_pos = {"x": 0.95, "y": -0.10, "z": 0.60}
@@ -74,21 +74,21 @@ class ArmPickPlace:
         worker.start()
 
     def run_sequence(self, class_name):
-        cube_model = self.model_map[class_name]
+        model_name = self.model_map[class_name]
 
         try:
-            self.move_model(self.gripper_model, self.home_pos, self.pick_hover, 0.8, carry_model=None)
-            self.move_model(self.gripper_model, self.pick_hover, self.pick_pos, 0.5, carry_model=None)
+            self.move_model(self.gripper_model, self.home_pos, self.pick_hover, 0.8)
+            self.move_model(self.gripper_model, self.pick_hover, self.pick_pos, 0.5)
 
-            self.set_pose(cube_model, self.pick_pos["x"], self.pick_pos["y"], self.pick_pos["z"])
+            self.set_pose(model_name, self.pick_pos["x"], self.pick_pos["y"], self.pick_pos["z"])
 
-            self.move_model(self.gripper_model, self.pick_pos, self.pick_hover, 0.5, carry_model=cube_model)
-            self.move_model(self.gripper_model, self.pick_hover, self.lift_pos, 0.8, carry_model=cube_model)
-            self.move_model(self.gripper_model, self.lift_pos, self.place_hover[class_name], 1.0, carry_model=cube_model)
-            self.move_model(self.gripper_model, self.place_hover[class_name], self.place_pos[class_name], 0.5, carry_model=cube_model)
+            self.move_model(self.gripper_model, self.pick_pos, self.pick_hover, 0.5, carry_model=model_name)
+            self.move_model(self.gripper_model, self.pick_hover, self.lift_pos, 0.8, carry_model=model_name)
+            self.move_model(self.gripper_model, self.lift_pos, self.place_hover[class_name], 1.0, carry_model=model_name)
+            self.move_model(self.gripper_model, self.place_hover[class_name], self.place_pos[class_name], 0.5, carry_model=model_name)
 
             self.set_pose(
-                cube_model,
+                model_name,
                 self.place_pos[class_name]["x"],
                 self.place_pos[class_name]["y"],
                 self.place_pos[class_name]["z"]
@@ -96,8 +96,8 @@ class ArmPickPlace:
 
             rospy.sleep(0.2)
 
-            self.move_model(self.gripper_model, self.place_pos[class_name], self.place_hover[class_name], 0.5, carry_model=None)
-            self.move_model(self.gripper_model, self.place_hover[class_name], self.home_pos, 1.0, carry_model=None)
+            self.move_model(self.gripper_model, self.place_pos[class_name], self.place_hover[class_name], 0.5)
+            self.move_model(self.gripper_model, self.place_hover[class_name], self.home_pos, 1.0)
 
             rospy.loginfo("ARM SORT DONE: %s", class_name)
 
@@ -106,7 +106,7 @@ class ArmPickPlace:
                 "rosrun",
                 "waste_sorting_gazebo",
                 "spawn_sequence.py"
-                  ])
+            ])
 
         except Exception as e:
             rospy.logerr("Arm sequence failed: %s", str(e))
@@ -144,13 +144,6 @@ class ArmPickPlace:
         state.pose.orientation.y = 0.0
         state.pose.orientation.z = 0.0
         state.pose.orientation.w = 1.0
-
-        state.twist.linear.x = 0.0
-        state.twist.linear.y = 0.0
-        state.twist.linear.z = 0.0
-        state.twist.angular.x = 0.0
-        state.twist.angular.y = 0.0
-        state.twist.angular.z = 0.0
 
         self.set_model_state(state)
 

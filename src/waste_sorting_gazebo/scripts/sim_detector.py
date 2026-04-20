@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
-import cv2
 import rospy
-import numpy as np
 
-from sensor_msgs.msg import Image
-from cv_bridge import CvBridge
+from gazebo_msgs.msg import ModelStates
 from waste_sorting_gazebo.msg import Detection2D
 
 
@@ -12,143 +9,109 @@ class SimDetector:
     def __init__(self):
         rospy.init_node("sim_detector")
 
-        self.bridge = CvBridge()
+        self.image_width = int(rospy.get_param("~image_width", 1280))
+        self.image_height = int(rospy.get_param("~image_height", 720))
 
-        self.image_sub = rospy.Subscriber(
-            "/top_camera/image_raw",
-            Image,
+        self.camera_x_min = float(rospy.get_param("~camera_x_min", -0.85))
+        self.camera_x_max = float(rospy.get_param("~camera_x_max", 0.85))
+        self.camera_y_min = float(rospy.get_param("~camera_y_min", -0.35))
+        self.camera_y_max = float(rospy.get_param("~camera_y_max", 0.35))
+
+        self.model_alias = {
+            "waste_plastic": "plastic",
+            "waste_metal": "metal",
+            "waste_paper": "paper"
+        }
+
+        self.det_pub = rospy.Publisher("/waste/detection", Detection2D, queue_size=10)
+
+        self.model_sub = rospy.Subscriber(
+            "/gazebo/model_states",
+            ModelStates,
             self.callback,
             queue_size=1
         )
 
-        self.det_pub = rospy.Publisher("/waste/detection", Detection2D, queue_size=10)
-        self.img_pub = rospy.Publisher("/waste/detection_image", Image, queue_size=1)
-
-        rospy.loginfo("SIM DETECTOR READY")
+        rospy.loginfo("SIM DETECTOR READY - MODEL STATES MODE")
 
     def callback(self, msg):
-        try:
-            frame = self.bridge.imgmsg_to_cv2(msg, "bgr8")
-        except Exception as e:
-            rospy.logerr("cv_bridge error: %s", str(e))
-            return
+        candidates = []
 
-        annotated = frame.copy()
-        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-
-        # RED mask (2 range)
-        red_lower1 = np.array([0, 80, 80], dtype=np.uint8)
-        red_upper1 = np.array([10, 255, 255], dtype=np.uint8)
-        red_lower2 = np.array([170, 80, 80], dtype=np.uint8)
-        red_upper2 = np.array([180, 255, 255], dtype=np.uint8)
-
-        red_mask1 = cv2.inRange(hsv, red_lower1, red_upper1)
-        red_mask2 = cv2.inRange(hsv, red_lower2, red_upper2)
-        red_mask = cv2.bitwise_or(red_mask1, red_mask2)
-
-        # GREEN mask
-        green_lower = np.array([35, 60, 60], dtype=np.uint8)
-        green_upper = np.array([90, 255, 255], dtype=np.uint8)
-        green_mask = cv2.inRange(hsv, green_lower, green_upper)
-
-        # YELLOW mask
-        yellow_lower = np.array([18, 80, 80], dtype=np.uint8)
-        yellow_upper = np.array([40, 255, 255], dtype=np.uint8)
-        yellow_mask = cv2.inRange(hsv, yellow_lower, yellow_upper)
-
-        detections = []
-        detections.extend(self.extract_objects(red_mask, "red"))
-        detections.extend(self.extract_objects(green_mask, "green"))
-        detections.extend(self.extract_objects(yellow_mask, "yellow"))
-
-        if len(detections) == 0:
-            self.publish_image(annotated)
-            return
-
-        best = max(detections, key=lambda d: d["area"])
-
-        x = best["x"]
-        y = best["y"]
-        w = best["w"]
-        h = best["h"]
-        cx = best["cx"]
-        cy = best["cy"]
-        cls = best["class_name"]
-
-        det = Detection2D()
-        det.class_name = cls
-        det.confidence = 1.0
-        det.x_min = x
-        det.y_min = y
-        det.x_max = x + w
-        det.y_max = y + h
-        det.center_x = cx
-        det.center_y = cy
-        self.det_pub.publish(det)
-
-        color_map = {
-            "red": (0, 0, 255),
-            "green": (0, 255, 0),
-            "yellow": (0, 255, 255)
-        }
-        draw_color = color_map.get(cls, (255, 255, 255))
-
-        cv2.rectangle(annotated, (x, y), (x + w, y + h), draw_color, 2)
-        cv2.circle(annotated, (cx, cy), 4, (255, 255, 255), -1)
-        cv2.putText(
-            annotated,
-            cls,
-            (x, max(20, y - 10)),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.7,
-            draw_color,
-            2
-        )
-
-        self.publish_image(annotated)
-
-    def extract_objects(self, mask, class_name):
-        kernel = np.ones((5, 5), np.uint8)
-        mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
-        mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
-
-        contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-
-        results = []
-
-        for c in contours:
-            area = cv2.contourArea(c)
-            if area < 150:
+        for i, model_name in enumerate(msg.name):
+            if model_name not in self.model_alias:
                 continue
 
-            x, y, w, h = cv2.boundingRect(c)
+            pose = msg.pose[i]
+            x_world = pose.position.x
+            y_world = pose.position.y
+            z_world = pose.position.z
 
-            # bins ve büyük alanları ele
-            if w > 250 or h > 250:
+            if not self.is_inside_camera_area(x_world, y_world):
                 continue
 
-            cx = int(x + w / 2)
-            cy = int(y + h / 2)
+            px, py = self.world_to_image(x_world, y_world)
 
-            results.append({
-                "class_name": class_name,
-                "area": area,
-                "x": x,
-                "y": y,
-                "w": w,
-                "h": h,
-                "cx": cx,
-                "cy": cy
+            box_w = 90
+            box_h = 90
+
+            x_min = max(0, px - box_w // 2)
+            y_min = max(0, py - box_h // 2)
+            x_max = min(self.image_width - 1, px + box_w // 2)
+            y_max = min(self.image_height - 1, py + box_h // 2)
+
+            candidates.append({
+                "model_name": model_name,
+                "class_name": self.model_alias[model_name],
+                "x_world": x_world,
+                "y_world": y_world,
+                "z_world": z_world,
+                "x_min": x_min,
+                "y_min": y_min,
+                "x_max": x_max,
+                "y_max": y_max,
+                "center_x": px,
+                "center_y": py
             })
 
-        return results
+        if len(candidates) == 0:
+            return
 
-    def publish_image(self, frame):
-        try:
-            img_msg = self.bridge.cv2_to_imgmsg(frame, "bgr8")
-            self.img_pub.publish(img_msg)
-        except Exception as e:
-            rospy.logerr("image publish error: %s", str(e))
+        best = max(candidates, key=lambda item: item["x_world"])
+
+        det = Detection2D()
+        det.class_name = best["class_name"]
+        det.confidence = 1.0
+        det.x_min = int(best["x_min"])
+        det.y_min = int(best["y_min"])
+        det.x_max = int(best["x_max"])
+        det.y_max = int(best["y_max"])
+        det.center_x = int(best["center_x"])
+        det.center_y = int(best["center_y"])
+
+        self.det_pub.publish(det)
+
+    def is_inside_camera_area(self, x_world, y_world):
+        if x_world < self.camera_x_min:
+            return False
+        if x_world > self.camera_x_max:
+            return False
+        if y_world < self.camera_y_min:
+            return False
+        if y_world > self.camera_y_max:
+            return False
+        return True
+
+    def world_to_image(self, x_world, y_world):
+        x_ratio = (x_world - self.camera_x_min) / (self.camera_x_max - self.camera_x_min)
+        y_ratio = (y_world - self.camera_y_min) / (self.camera_y_max - self.camera_y_min)
+
+        px = int(x_ratio * self.image_width)
+        py = int((1.0 - y_ratio) * self.image_height)
+
+        px = max(0, min(self.image_width - 1, px))
+        py = max(0, min(self.image_height - 1, py))
+
+        return px, py
 
 
 if __name__ == "__main__":

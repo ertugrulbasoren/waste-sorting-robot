@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
-print("SPAWN SEQUENCE STARTED")
 import os
 import rospy
 import subprocess
 from gazebo_msgs.srv import DeleteModel
 
 STATE_FILE = os.path.expanduser("~/waste_sorting_ws/sequence_state.txt")
-COLORS = ["red", "green", "yellow"]
+TYPES = ["plastic", "metal", "paper"]
 
 def read_index():
     if not os.path.exists(STATE_FILE):
@@ -27,7 +26,7 @@ if __name__ == "__main__":
     rospy.wait_for_service("/gazebo/delete_model")
     delete_model = rospy.ServiceProxy("/gazebo/delete_model", DeleteModel)
 
-    for name in ["trash_red", "trash_green", "trash_yellow"]:
+    for name in ["waste_plastic", "waste_metal", "trash_red", "trash_green", "trash_yellow"]:
         try:
             delete_model(name)
             rospy.loginfo("Deleted existing model: %s", name)
@@ -35,14 +34,14 @@ if __name__ == "__main__":
             pass
 
     idx = read_index()
-    color = COLORS[idx % len(COLORS)]
-    write_index((idx + 1) % len(COLORS))
+    waste_type = TYPES[idx % len(TYPES)]
+    write_index((idx + 1) % len(TYPES))
 
     subprocess.call([
         "rosrun",
         "waste_sorting_gazebo",
         "spawn_trash.py",
-        "_color:=" + color
+        "_waste_type:=" + waste_type
     ])
 
-    rospy.loginfo("Spawned next object: %s", color)
+    rospy.loginfo("Spawned next object: %s", waste_type)
