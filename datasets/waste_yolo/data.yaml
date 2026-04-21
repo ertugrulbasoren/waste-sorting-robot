@@ -1,8 +1,8 @@
-path: /home/ertugrulbasoren/waste_sorting_ws/datasets/waste_yolo
+path: .
 train: images/train
 val: images/val
 
 names:
-  0: red
-  1: green
-  2: yellow
+  0: paper
+  1: plastic
+  2: metal
