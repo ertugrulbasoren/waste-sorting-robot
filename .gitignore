@@ -7,12 +7,18 @@ install/
 log/
 logs/
 .catkin_tools/
+.catkin_workspace
 
 # =========================
 # ROS runtime
 # =========================
 .ros/
 sequence_state.txt
+
+# =========================
+# External / vendor code
+# =========================
+src/universal_robot/
 
 # =========================
 # Python
@@ -49,8 +55,9 @@ gazebo_logs/
 *.ini
 
 # =========================
-# Temporary files
+# Backup / temporary files
 # =========================
+*.save
 *.swp
 *.tmp
 *.bak
