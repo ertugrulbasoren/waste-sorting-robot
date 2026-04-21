@@ -1,17 +1,25 @@
 #!/usr/bin/env python3
-
 import os
 import rospy
+import rospkg
 from std_msgs.msg import String
 from gazebo_msgs.srv import SpawnModel, DeleteModel
 from geometry_msgs.msg import Pose
+
 
 class AutoCycleManager:
     def __init__(self):
         rospy.init_node('auto_cycle_manager')
 
         self.colors = ['red', 'green', 'yellow']
-        self.state_file = "/home/ertugrulbasoren/waste_sorting_ws/sequence_state.txt"
+
+        rospack = rospkg.RosPack()
+        control_pkg_path = rospack.get_path('waste_sorting_control')
+        gazebo_pkg_path = rospack.get_path('waste_sorting_gazebo')
+
+        repo_root = os.path.abspath(os.path.join(control_pkg_path, '..', '..'))
+        self.state_file = os.path.join(repo_root, 'sequence_state.txt')
+        self.models_base = os.path.join(gazebo_pkg_path, 'models')
 
         self.processing = False
         self.accept_detection = False
@@ -29,14 +37,12 @@ class AutoCycleManager:
         self.spawn_next()
 
     def get_model_info(self, color):
-        base = "/home/ertugrulbasoren/waste_sorting_ws/src/waste_sorting_gazebo/models"
-
         if color == 'red':
-            return f"{base}/trash_object_red/model.sdf", "trash_red"
+            return os.path.join(self.models_base, 'trash_object_red', 'model.sdf'), 'trash_red'
         elif color == 'green':
-            return f"{base}/trash_object_green/model.sdf", "trash_green"
+            return os.path.join(self.models_base, 'trash_object_green', 'model.sdf'), 'trash_green'
         elif color == 'yellow':
-            return f"{base}/trash_object_yellow/model.sdf", "trash_yellow"
+            return os.path.join(self.models_base, 'trash_object_yellow', 'model.sdf'), 'trash_yellow'
         else:
             return None, None
 
@@ -45,7 +51,7 @@ class AutoCycleManager:
             try:
                 self.delete_model(name)
                 rospy.loginfo("Deleted model: %s", name)
-            except:
+            except Exception:
                 pass
 
     def load_index(self):
@@ -56,7 +62,7 @@ class AutoCycleManager:
             with open(self.state_file, 'r') as f:
                 value = int(f.read().strip())
                 return value % len(self.colors)
-        except:
+        except Exception:
             return 0
 
     def save_index(self, index):
@@ -91,7 +97,6 @@ class AutoCycleManager:
             self.save_index(next_index)
 
             self.processing = False
-
             rospy.Timer(rospy.Duration(2.0), self.enable_detection, oneshot=True)
 
         except rospy.ServiceException as e:
@@ -105,7 +110,6 @@ class AutoCycleManager:
             return
 
         detected_color = msg.data
-
         if detected_color not in self.colors:
             return
 
@@ -121,6 +125,7 @@ class AutoCycleManager:
         self.delete_all_known_models()
         rospy.sleep(1.0)
         self.spawn_next()
+
 
 if __name__ == '__main__':
     AutoCycleManager()
