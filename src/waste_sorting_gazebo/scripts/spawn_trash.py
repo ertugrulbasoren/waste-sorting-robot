@@ -1,63 +1,55 @@
 #!/usr/bin/env python3
 import os
 import rospy
-from gazebo_msgs.srv import SpawnModel, DeleteModel
+import rospkg
+from gazebo_msgs.srv import SpawnModel
 from geometry_msgs.msg import Pose
 
-MODEL_BASE_PATH = os.path.expanduser("~/waste_sorting_ws/src/waste_sorting_gazebo/models")
 
-MODEL_INFO = {
-    "plastic": {
-        "model_name": "waste_plastic",
-        "model_dir": "waste_plastic"
-    },
-    "metal": {
-        "model_name": "waste_metal",
-        "model_dir": "waste_metal"
-    },
-    "paper": {
-        "model_name": "waste_paper",
-        "model_dir": "waste_paper"
+def get_model_path(waste_type):
+    rospack = rospkg.RosPack()
+    pkg_path = rospack.get_path("waste_sorting_gazebo")
+
+    model_map = {
+        "plastic": "trash_object_red",
+        "metal": "trash_object_yellow",
+        "paper": "trash_object_green"
     }
-}
-def load_model_sdf(model_dir_name):
-    model_path = os.path.join(MODEL_BASE_PATH, model_dir_name, "model.sdf")
+
+    if waste_type not in model_map:
+        return None, None
+
+    model_dir = model_map[waste_type]
+    model_path = os.path.join(pkg_path, "models", model_dir, "model.sdf")
+    model_name = "waste_" + waste_type
+
+    return model_path, model_name
+
+
+def spawn_model(model_path, model_name):
+    rospy.wait_for_service('/gazebo/spawn_sdf_model')
+    spawn = rospy.ServiceProxy('/gazebo/spawn_sdf_model', SpawnModel)
+
     with open(model_path, "r") as f:
-        return f.read()
+        model_xml = f.read()
+
+    pose = Pose()
+    pose.position.x = -0.8
+    pose.position.y = 0.0
+    pose.position.z = 0.2
+
+    spawn(model_name, model_xml, "", pose, "world")
+    rospy.loginfo("Spawned: %s", model_name)
+
 
 if __name__ == "__main__":
     rospy.init_node("spawn_trash")
 
     waste_type = rospy.get_param("~waste_type", "plastic")
 
-    if waste_type not in MODEL_INFO:
-        rospy.logerr("Unknown waste_type: %s", waste_type)
-        raise SystemExit(1)
+    model_path, model_name = get_model_path(waste_type)
 
-    model_name = MODEL_INFO[waste_type]["model_name"]
-    model_dir = MODEL_INFO[waste_type]["model_dir"]
-
-    rospy.wait_for_service("/gazebo/delete_model")
-    rospy.wait_for_service("/gazebo/spawn_sdf_model")
-
-    delete_model = rospy.ServiceProxy("/gazebo/delete_model", DeleteModel)
-    spawn_model = rospy.ServiceProxy("/gazebo/spawn_sdf_model", SpawnModel)
-
-    try:
-        delete_model(model_name)
-    except Exception:
-        pass
-
-    model_xml = load_model_sdf(model_dir)
-
-    pose = Pose()
-    pose.position.x = -0.6
-    pose.position.y = 0.0
-    pose.position.z = 0.25
-    pose.orientation.x = 0.0
-    pose.orientation.y = 0.0
-    pose.orientation.z = 0.0
-    pose.orientation.w = 1.0
-
-    spawn_model(model_name, model_xml, "", pose, "world")
-    rospy.loginfo("Spawned %s as %s", waste_type, model_name)
+    if model_path is None:
+        rospy.logerr("Invalid waste type: %s", waste_type)
+    else:
+        spawn_model(model_path, model_name)
