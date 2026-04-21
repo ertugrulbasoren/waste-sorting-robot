@@ -1,0 +1,12 @@
+pick_targets:
+  metal_pregrasp:
+    frame_id: world
+    position:
+      x: 1.200639
+      y: 0.000025
+      z: 0.180000
+    orientation:
+      x: -0.296000
+      y: 0.641000
+      z: -0.544000
+      w: 0.453000

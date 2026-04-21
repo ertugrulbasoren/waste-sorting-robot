@@ -1,0 +1,46 @@
+<launch>
+  <!-- Gazebo -->
+  <arg name="paused" default="true"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find waste_sorting_gazebo)/worlds/waste_sorting.world"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="headless" value="$(arg headless)"/>
+    <arg name="debug" value="$(arg debug)"/>
+  </include>
+
+  <!-- Sistem parametreleri -->
+  <param name="/use_sim_time" value="true"/>
+
+  <!-- Gerçek robot kol entegrasyonu: UR5 -->
+  <include file="$(find waste_sorting_bringup)/launch/ur5_integration.launch"/>
+
+  <!-- İlk nesne spawn zinciri -->
+  <node pkg="waste_sorting_gazebo"
+        type="spawn_sequence.py"
+        name="spawn_sequence"
+        output="screen"/>
+
+  <!-- Renk tabanlı sim detector -->
+  <node pkg="waste_sorting_gazebo"
+        type="sim_detector.py"
+        name="sim_detector"
+        output="screen"/>
+
+  <!-- Tracker -->
+  <node pkg="waste_sorting_gazebo"
+        type="tracker_node.py"
+        name="tracker_node"
+        output="screen">
+    <param name="max_distance" value="80"/>
+    <param name="track_timeout" value="0.8"/>
+    <param name="pick_line_y" value="210"/>
+    <param name="pick_tolerance" value="18"/>
+  </node>
+</launch>
