@@ -12,6 +12,7 @@ logs/
 # ROS runtime
 # =========================
 .ros/
+sequence_state.txt
 
 # =========================
 # Python
@@ -45,7 +46,6 @@ gazebo_logs/
 *.jpg
 *.jpeg
 *.png
-*.txt
 *.ini
 
 # =========================
