@@ -1,4 +1,3 @@
-<?xml version="1.0"?>
 <launch>
   <!-- Robot description -->
   <include file="$(find ur_gazebo)/launch/inc/load_ur5.launch.xml">
@@ -12,7 +11,8 @@
   <!-- Robot state publisher -->
   <node pkg="robot_state_publisher"
         type="robot_state_publisher"
-        name="ur5_robot_state_publisher">
+        name="ur5_robot_state_publisher"
+        output="screen">
     <param name="publish_frequency" type="double" value="125"/>
     <param name="tf_prefix" value=""/>
   </node>
@@ -28,11 +28,12 @@
         output="screen"
         respawn="false"/>
 
-  <!-- Load and start active controllers -->
+  <!-- Delay controller startup to avoid spawn/control race condition -->
   <node name="ur5_controller_spawner"
         pkg="controller_manager"
         type="spawner"
         args="joint_state_controller pos_joint_traj_controller"
         output="screen"
-        respawn="false"/>
+        respawn="false"
+        launch-prefix="bash -c 'sleep 4; exec $0 $@'"/>
 </launch>
