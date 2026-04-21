@@ -5,3 +5,5 @@ logs/
 __pycache__/
 *.log
 .DS_Store
+frame_*.jpg
+frame_*.ini
