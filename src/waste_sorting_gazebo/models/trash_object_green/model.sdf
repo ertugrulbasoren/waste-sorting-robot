@@ -1,33 +1,96 @@
+<?xml version="1.0"?>
 <sdf version="1.6">
   <model name="trash_object_green">
-    <link name="object">
+    <static>false</static>
+    <allow_auto_disable>false</allow_auto_disable>
+
+    <link name="paper_link">
+      <pose>0 0 0 0 0 0</pose>
+
       <inertial>
-        <mass>0.1</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>0.0001</ixx>
-          <iyy>0.0001</iyy>
-          <izz>0.0001</izz>
+          <ixx>0.00002</ixx>
+          <iyy>0.00002</iyy>
+          <izz>0.00001</izz>
           <ixy>0</ixy>
           <ixz>0</ixz>
           <iyz>0</iyz>
         </inertia>
       </inertial>
-      <collision name="collision">
+
+      <collision name="paper_collision">
+        <pose>0 0 0.0025 0.12 0.08 0.15</pose>
         <geometry>
           <box>
-            <size>0.05 0.05 0.05</size>
+            <size>0.16 0.11 0.005</size>
           </box>
         </geometry>
       </collision>
-      <visual name="visual">
+
+      <visual name="paper_base_visual">
+        <pose>0 0 0.0025 0.12 0.08 0.15</pose>
         <geometry>
           <box>
-            <size>0.05 0.05 0.05</size>
+            <size>0.16 0.11 0.005</size>
           </box>
         </geometry>
         <material>
-          <ambient>0 1 0 1</ambient>
-          <diffuse>0 1 0 1</diffuse>
+          <ambient>0.98 0.98 0.96 1.0</ambient>
+          <diffuse>0.98 0.98 0.96 1.0</diffuse>
+          <specular>0.10 0.10 0.10 1.0</specular>
+        </material>
+      </visual>
+
+      <visual name="paper_fold_visual">
+        <pose>0.030 0.000 0.010 0.45 0.00 0.20</pose>
+        <geometry>
+          <box>
+            <size>0.08 0.09 0.003</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.97 0.97 0.95 1.0</ambient>
+          <diffuse>0.97 0.97 0.95 1.0</diffuse>
+        </material>
+      </visual>
+
+      <visual name="paper_line_1">
+        <pose>-0.020 0.000 0.006 0.12 0.08 0.15</pose>
+        <geometry>
+          <box>
+            <size>0.090 0.002 0.001</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.20 0.35 0.90 1.0</ambient>
+          <diffuse>0.20 0.35 0.90 1.0</diffuse>
+        </material>
+      </visual>
+
+      <visual name="paper_line_2">
+        <pose>0.000 0.015 0.006 0.12 0.08 0.15</pose>
+        <geometry>
+          <box>
+            <size>0.085 0.002 0.001</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.20 0.35 0.90 1.0</ambient>
+          <diffuse>0.20 0.35 0.90 1.0</diffuse>
+        </material>
+      </visual>
+
+      <visual name="paper_line_3">
+        <pose>0.010 -0.015 0.006 0.12 0.08 0.15</pose>
+        <geometry>
+          <box>
+            <size>0.075 0.002 0.001</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.20 0.35 0.90 1.0</ambient>
+          <diffuse>0.20 0.35 0.90 1.0</diffuse>
         </material>
       </visual>
     </link>

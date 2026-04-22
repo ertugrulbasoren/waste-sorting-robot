@@ -20,7 +20,7 @@
   <!-- Load controller settings -->
   <rosparam file="$(find ur_gazebo)/config/ur5_controllers.yaml" command="load"/>
 
-  <!-- Spawn UR5 into already running Gazebo with stable initial joint pose -->
+  <!-- Spawn with SAFE initial joint pose -->
   <node name="spawn_ur5_model"
         pkg="gazebo_ros"
         type="spawn_model"
@@ -28,7 +28,7 @@
         output="screen"
         respawn="false"/>
 
-  <!-- Delay controller startup to avoid spawn/control race condition -->
+  <!-- Start position controllers -->
   <node name="ur5_controller_spawner"
         pkg="controller_manager"
         type="spawner"

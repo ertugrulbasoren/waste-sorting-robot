@@ -24,11 +24,11 @@
         name="spawn_simple_arm"
         output="screen"/>
 
-  <!-- İlk nesne spawn zinciri -->
-  <node pkg="waste_sorting_gazebo"
-        type="spawn_sequence.py"
-        name="spawn_sequence"
-        output="screen"/>
+        <node pkg="waste_sorting_gazebo"
+      type="spawn_sequence.py"
+      name="spawn_sequence"
+      output="screen"
+      launch-prefix="bash -c 'sleep 5; exec $0 $@'"/>
 
   <!-- Renk tabanlı sim detector -->
   <node pkg="waste_sorting_gazebo"

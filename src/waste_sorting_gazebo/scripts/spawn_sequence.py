@@ -1,61 +1,57 @@
 #!/usr/bin/env python3
+
 import os
-import rospy
 import subprocess
-import rospkg
-from gazebo_msgs.srv import DeleteModel
+import time
+import rospy
+
+STATE_FILE = os.path.expanduser("~/waste_sorting_ws/sequence_state.txt")
+CLASS_SEQUENCE = ["plastic", "paper", "metal"]
 
 
-TYPES = ["plastic", "metal", "paper"]
-
-
-def get_state_file():
-    rospack = rospkg.RosPack()
-    gazebo_pkg_path = rospack.get_path("waste_sorting_gazebo")
-    repo_root = os.path.abspath(os.path.join(gazebo_pkg_path, "..", ".."))
-    return os.path.join(repo_root, "sequence_state.txt")
-
-
-def read_index(state_file):
-    if not os.path.exists(state_file):
+def read_index():
+    if not os.path.exists(STATE_FILE):
         return 0
 
     try:
-        with open(state_file, "r") as f:
+        with open(STATE_FILE, "r", encoding="utf-8") as f:
             return int(f.read().strip())
     except Exception:
         return 0
 
 
-def write_index(state_file, index):
-    with open(state_file, "w") as f:
-        f.write(str(index))
+def write_index(i):
+    with open(STATE_FILE, "w", encoding="utf-8") as f:
+        f.write(str(i))
 
 
-if __name__ == "__main__":
+def main():
     rospy.init_node("spawn_sequence")
+    rospy.loginfo("SPAWN SEQUENCE STARTED")
 
-    state_file = get_state_file()
+    # İlk açılışta tüm node'ların hazır olması için bekle
+    initial_delay = float(rospy.get_param("~initial_delay", 4.0))
+    rospy.loginfo("Waiting %.1f seconds before spawning...", initial_delay)
+    time.sleep(initial_delay)
 
-    rospy.wait_for_service("/gazebo/delete_model")
-    delete_model = rospy.ServiceProxy("/gazebo/delete_model", DeleteModel)
+    idx = read_index()
+    waste_type = CLASS_SEQUENCE[idx % len(CLASS_SEQUENCE)]
+    write_index((idx + 1) % len(CLASS_SEQUENCE))
 
-    for name in ["waste_plastic", "waste_metal", "trash_red", "trash_green", "trash_yellow"]:
-        try:
-            delete_model(name)
-            rospy.loginfo("Deleted existing model: %s", name)
-        except Exception:
-            pass
-
-    idx = read_index(state_file)
-    waste_type = TYPES[idx % len(TYPES)]
-    write_index(state_file, (idx + 1) % len(TYPES))
-
-    subprocess.call([
+    cmd = [
         "rosrun",
         "waste_sorting_gazebo",
         "spawn_trash.py",
-        "_waste_type:=" + waste_type
-    ])
+        "_waste_type:={}".format(waste_type),
+    ]
 
-    rospy.loginfo("Spawned next object: %s", waste_type)
+    result = subprocess.call(cmd)
+    if result != 0:
+        rospy.logerr("spawn_trash.py failed with exit code %s", result)
+        return
+
+    rospy.loginfo("Spawned next object type: %s", waste_type)
+
+
+if __name__ == "__main__":
+    main()

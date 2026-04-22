@@ -1,33 +1,107 @@
+<?xml version="1.0"?>
 <sdf version="1.6">
   <model name="trash_object_red">
-    <link name="object">
+    <static>false</static>
+    <allow_auto_disable>false</allow_auto_disable>
+
+    <link name="plastic_bottle_link">
+      <pose>0 0 0 0 0 0</pose>
+
       <inertial>
-        <mass>0.1</mass>
+        <mass>0.03</mass>
         <inertia>
-          <ixx>0.0001</ixx>
-          <iyy>0.0001</iyy>
-          <izz>0.0001</izz>
+          <ixx>0.00003</ixx>
+          <iyy>0.00003</iyy>
+          <izz>0.00001</izz>
           <ixy>0</ixy>
           <ixz>0</ixz>
           <iyz>0</iyz>
         </inertia>
       </inertial>
-      <collision name="collision">
+
+      <collision name="body_collision">
+        <pose>0 0 0.060 0 0 0</pose>
         <geometry>
-          <box>
-            <size>0.05 0.05 0.05</size>
-          </box>
+          <cylinder>
+            <radius>0.026</radius>
+            <length>0.12</length>
+          </cylinder>
         </geometry>
       </collision>
-      <visual name="visual">
+
+      <collision name="neck_collision">
+        <pose>0 0 0.132 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.011</radius>
+            <length>0.030</length>
+          </cylinder>
+        </geometry>
+      </collision>
+
+      <collision name="cap_collision">
+        <pose>0 0 0.152 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.012</radius>
+            <length>0.010</length>
+          </cylinder>
+        </geometry>
+      </collision>
+
+      <visual name="body_visual">
+        <pose>0 0 0.060 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.026</radius>
+            <length>0.12</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.15 0.45 0.95 0.55</ambient>
+          <diffuse>0.20 0.55 1.00 0.55</diffuse>
+          <specular>0.30 0.30 0.30 0.30</specular>
+        </material>
+      </visual>
+
+      <visual name="label_visual">
+        <pose>0 0.0265 0.065 1.57079632679 0 0</pose>
         <geometry>
           <box>
-            <size>0.05 0.05 0.05</size>
+            <size>0.045 0.030 0.001</size>
           </box>
         </geometry>
         <material>
-          <ambient>1 0 0 1</ambient>
-          <diffuse>1 0 0 1</diffuse>
+          <ambient>0.95 0.95 0.95 1.0</ambient>
+          <diffuse>0.95 0.95 0.95 1.0</diffuse>
+        </material>
+      </visual>
+
+      <visual name="neck_visual">
+        <pose>0 0 0.132 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.011</radius>
+            <length>0.030</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.75 0.85 1.00 0.60</ambient>
+          <diffuse>0.75 0.85 1.00 0.60</diffuse>
+        </material>
+      </visual>
+
+      <visual name="cap_visual">
+        <pose>0 0 0.152 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.012</radius>
+            <length>0.010</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.05 0.15 0.55 1.0</ambient>
+          <diffuse>0.08 0.20 0.65 1.0</diffuse>
         </material>
       </visual>
     </link>

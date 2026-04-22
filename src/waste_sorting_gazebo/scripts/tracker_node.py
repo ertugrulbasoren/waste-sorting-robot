@@ -2,7 +2,6 @@
 import json
 import math
 import rospy
-
 from std_msgs.msg import String
 from waste_sorting_gazebo.msg import Detection2D
 
@@ -13,20 +12,23 @@ class TrackerNode:
 
         self.max_distance = int(rospy.get_param("~max_distance", 80))
         self.track_timeout = float(rospy.get_param("~track_timeout", 0.8))
-        self.pick_line_x = int(rospy.get_param("~pick_line_x", 970))
-        self.pick_tolerance = int(rospy.get_param("~pick_tolerance", 120))
 
         self.next_track_id = 1
         self.tracks = {}
 
-        self.det_sub = rospy.Subscriber("/waste/detection", Detection2D, self.det_callback, queue_size=10)
+        self.det_sub = rospy.Subscriber(
+            "/waste/detection",
+            Detection2D,
+            self.det_callback,
+            queue_size=10,
+        )
 
         self.track_pub = rospy.Publisher("/waste/tracked_detection", String, queue_size=10)
         self.pick_pub = rospy.Publisher("/waste/pick_event", String, queue_size=10)
 
         rospy.Timer(rospy.Duration(0.2), self.cleanup_tracks)
 
-        rospy.loginfo("TRACKER READY")
+        rospy.loginfo("TRACKER READY - immediate pick mode")
 
     def det_callback(self, msg):
         now = rospy.get_time()
@@ -60,17 +62,18 @@ class TrackerNode:
                 "x_max": msg.x_max,
                 "y_max": msg.y_max,
                 "last_seen": now,
-                "picked": False
+                "picked": False,
             }
         else:
-            self.tracks[matched_id]["class_name"] = msg.class_name
-            self.tracks[matched_id]["center_x"] = msg.center_x
-            self.tracks[matched_id]["center_y"] = msg.center_y
-            self.tracks[matched_id]["x_min"] = msg.x_min
-            self.tracks[matched_id]["y_min"] = msg.y_min
-            self.tracks[matched_id]["x_max"] = msg.x_max
-            self.tracks[matched_id]["y_max"] = msg.y_max
-            self.tracks[matched_id]["last_seen"] = now
+            track = self.tracks[matched_id]
+            track["class_name"] = msg.class_name
+            track["center_x"] = msg.center_x
+            track["center_y"] = msg.center_y
+            track["x_min"] = msg.x_min
+            track["y_min"] = msg.y_min
+            track["x_max"] = msg.x_max
+            track["y_max"] = msg.y_max
+            track["last_seen"] = now
 
         track = self.tracks[matched_id]
 
@@ -83,24 +86,22 @@ class TrackerNode:
             "y_min": track["y_min"],
             "x_max": track["x_max"],
             "y_max": track["y_max"],
-            "picked": track["picked"]
+            "picked": track["picked"],
         }
         self.track_pub.publish(json.dumps(tracked_msg))
 
         if not track["picked"]:
-            if abs(track["center_x"] - self.pick_line_x) <= self.pick_tolerance:
-                track["picked"] = True
+            track["picked"] = True
 
-                pick_msg = {
-                    "track_id": matched_id,
-                    "class_name": track["class_name"],
-                    "center_x": track["center_x"],
-                    "center_y": track["center_y"],
-                    "pick_line_x": self.pick_line_x
-                }
+            pick_msg = {
+                "track_id": matched_id,
+                "class_name": track["class_name"],
+                "center_x": track["center_x"],
+                "center_y": track["center_y"],
+            }
 
-                self.pick_pub.publish(json.dumps(pick_msg))
-                rospy.loginfo("PICK EVENT: %s", json.dumps(pick_msg))
+            self.pick_pub.publish(json.dumps(pick_msg))
+            rospy.loginfo("PICK EVENT: %s", json.dumps(pick_msg))
 
     def cleanup_tracks(self, _event):
         now = rospy.get_time()
