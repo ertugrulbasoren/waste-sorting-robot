@@ -6,7 +6,7 @@
         name="yolo_detector"
         output="screen">
     <param name="image_topic" value="/top_camera/image_raw" />
-    <param name="model_path" value="/home/ertugrulbasoren/waste_sorting_ws/src/waste_sorting_gazebo/models_yolo/best.pt" />
+    <param name="model_path" value="/home/ertugrulbasoren/waste-sorting-robot-project/src/waste_sorting_gazebo/models_yolo/best.pt" />
     <param name="conf_threshold" value="0.25" />
     <param name="publish_annotated" value="true" />
   </node>

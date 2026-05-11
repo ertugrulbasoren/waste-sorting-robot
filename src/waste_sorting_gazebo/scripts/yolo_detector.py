@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 import os
 import sys
+import rospy
 
-sys.path.append('/home/ertugrulbasoren/.local/lib/python3.8/site-packages')
+
 
 import cv2
 import rospy
@@ -21,7 +22,7 @@ class YoloDetectorNode:
         self.image_topic = rospy.get_param("~image_topic", "/top_camera/image_raw")
         self.model_path = rospy.get_param(
             "~model_path",
-            "/home/ertugrulbasoren/waste_sorting_ws/src/waste_sorting_gazebo/models_yolo/best.pt"
+            "/home/ertugrulbasoren/waste_sorting_robot_project/src/waste_sorting_gazebo/models_yolo/best.pt"
         )
         self.conf_threshold = float(rospy.get_param("~conf_threshold", 0.25))
         self.publish_annotated = bool(rospy.get_param("~publish_annotated", True))
@@ -89,17 +90,16 @@ class YoloDetectorNode:
 
         conf = float(best_box.conf[0].item())
         cls_id = int(best_box.cls[0].item())
-        _raw_class = self.model.names[cls_id]
-
-        class_name = "object"
+        class_name = self.model.names[cls_id]
 
         xyxy = best_box.xyxy[0].cpu().numpy().astype(int)
         x1, y1, x2, y2 = xyxy.tolist()
+
         cx = int((x1 + x2) / 2)
         cy = int((y1 + y2) / 2)
 
         det_msg = Detection2D()
-        det_msg.class_name = class_name
+        det_msg.class_name = str(class_name)
         det_msg.confidence = conf
         det_msg.x_min = x1
         det_msg.y_min = y1
@@ -107,12 +107,15 @@ class YoloDetectorNode:
         det_msg.y_max = y2
         det_msg.center_x = cx
         det_msg.center_y = cy
+
         self.det_pub.publish(det_msg)
 
         if self.publish_annotated:
-            label = f"OBJ {conf:.2f}"
+            label = f"{class_name} {conf:.2f}"
+
             cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
             cv2.circle(frame, (cx, cy), 4, (0, 0, 255), -1)
+
             cv2.putText(
                 frame,
                 label,
@@ -122,6 +125,7 @@ class YoloDetectorNode:
                 (0, 255, 0),
                 2
             )
+
             self.publish_image(frame)
 
     def publish_image(self, frame):

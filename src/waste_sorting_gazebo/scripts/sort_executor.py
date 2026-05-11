@@ -12,15 +12,17 @@ class SortExecutor:
         rospy.init_node("sort_executor")
 
         self.model_map = {
-            "red": "trash_red",
-            "green": "trash_green",
-            "yellow": "trash_yellow"
+            "glass": "trash_glass",
+            "metal": "trash_metal",
+            "paper": "trash_paper",
+            "plastic": "trash_plastic"
         }
 
         self.bin_positions = {
-            "red":    {"x": 1.50, "y": -0.45, "z": 0.35},
-            "green":  {"x": 1.50, "y":  0.00, "z": 0.35},
-            "yellow": {"x": 1.50, "y":  0.45, "z": 0.35}
+            "glass":   {"x": 1.50, "y":  0.00, "z": 0.35},
+            "metal":   {"x": 1.50, "y":  0.45, "z": 0.35},
+            "paper":   {"x": 1.50, "y": -0.45, "z": 0.35},
+            "plastic": {"x": 1.50, "y": -0.90, "z": 0.35}
         }
 
         rospy.wait_for_service("/gazebo/set_model_state")
@@ -28,7 +30,11 @@ class SortExecutor:
 
         self.pick_sub = rospy.Subscriber("/waste/pick_event", String, self.pick_callback, queue_size=10)
 
-        rospy.loginfo("SORT EXECUTOR READY")
+        rospy.loginfo("SORT EXECUTOR READY - YOLO 4 CLASS MODE")
+        rospy.loginfo("glass -> green bin")
+        rospy.loginfo("metal -> yellow bin")
+        rospy.loginfo("paper -> blue bin")
+        rospy.loginfo("plastic -> red bin")
 
     def pick_callback(self, msg):
         try:
@@ -37,7 +43,8 @@ class SortExecutor:
             rospy.logerr("JSON parse error: %s", str(e))
             return
 
-        class_name = data.get("class_name", "").strip()
+        class_name = data.get("class_name", "").strip().lower()
+
         if class_name not in self.model_map:
             rospy.logwarn("Unknown class_name: %s", class_name)
             return
@@ -67,7 +74,7 @@ class SortExecutor:
 
         try:
             self.set_model_state(state)
-            rospy.loginfo("SORTED: %s -> bin %s", model_name, class_name)
+            rospy.loginfo("SORTED: %s -> %s bin", model_name, class_name)
         except Exception as e:
             rospy.logerr("SetModelState failed: %s", str(e))
 

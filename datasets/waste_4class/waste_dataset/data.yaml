@@ -1,0 +1,10 @@
+train: train/images
+val: valid/images
+
+nc: 4
+
+names:
+  0: glass
+  1: metal
+  2: paper
+  3: plastic
