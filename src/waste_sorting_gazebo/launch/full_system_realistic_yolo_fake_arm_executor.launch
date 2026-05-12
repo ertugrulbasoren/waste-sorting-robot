@@ -2,13 +2,13 @@
   <!--
     Full realistic YOLO pipeline with fake robot arm executor.
 
-    Difference from full_system_realistic_yolo.launch:
-      - This launch does NOT start sort_executor.py.
-      - Object sorting is performed by fake_robot_arm_executor.py.
-      - This is the first robot-arm execution architecture step.
+    This launch does NOT start sort_executor.py.
+    Object sorting is performed by fake_robot_arm_executor.py.
 
     Pipeline:
       realistic_conveyor_feeder
+        ↓
+      top camera
         ↓
       YOLO detector
         ↓
@@ -20,7 +20,11 @@
         ↓
       /waste/robot_arm_result
         ↓
-      realistic_yolo_kpi_logger still evaluates YOLO class accuracy
+      robot_arm_result_logger
+
+    KPI:
+      - realistic_yolo_kpi_logger measures YOLO class accuracy.
+      - robot_arm_result_logger measures robot execution success and cycle time.
   -->
 
   <arg name="gui" default="true"/>
@@ -40,7 +44,8 @@
   <arg name="end_x" default="0.20"/>
   <arg name="conveyor_speed" default="0.10"/>
 
-  <arg name="kpi_log_path" default="$(env HOME)/waste-sorting-robot-project/logs/trials/realistic_yolo_kpi.csv"/>
+  <arg name="yolo_kpi_log_path" default="$(env HOME)/waste-sorting-robot-project/logs/trials/realistic_yolo_kpi.csv"/>
+  <arg name="robot_arm_log_path" default="$(env HOME)/waste-sorting-robot-project/logs/trials/robot_arm_results.csv"/>
 
   <arg name="arm_model_name" default="fake_sorting_arm"/>
   <arg name="arm_x" default="0.55"/>
@@ -91,7 +96,7 @@
     <param name="ignore_duplicate_model_names" value="true"/>
   </node>
 
-  <!-- KPI logger -->
+  <!-- YOLO KPI logger -->
   <node
     pkg="waste_sorting_gazebo"
     type="realistic_yolo_kpi_logger.py"
@@ -101,7 +106,7 @@
 
     <param name="ground_truth_topic" value="/waste/current_ground_truth"/>
     <param name="pick_event_topic" value="/waste/pick_event_resolved"/>
-    <param name="log_path" value="$(arg kpi_log_path)"/>
+    <param name="log_path" value="$(arg yolo_kpi_log_path)"/>
     <param name="max_gt_age_sec" value="20.0"/>
     <param name="ignore_duplicate_track_ids" value="true"/>
     <param name="ignore_duplicate_model_names" value="true"/>
@@ -123,8 +128,7 @@
     <param name="delete_existing" value="true"/>
   </node>
 
-  <!-- Fake robot arm executor.
-       This replaces sort_executor.py for this launch. -->
+  <!-- Fake robot arm executor -->
   <node
     pkg="waste_sorting_gazebo"
     type="fake_robot_arm_executor.py"
@@ -156,8 +160,21 @@
     <param name="duplicate_guard_sec" value="5.0"/>
   </node>
 
-  <!-- Realistic 3D object feeder.
-       It listens to resolved event so it stops conveyor motion after robot arm accepts event. -->
+  <!-- Robot arm result logger -->
+  <node
+    pkg="waste_sorting_gazebo"
+    type="robot_arm_result_logger.py"
+    name="robot_arm_result_logger"
+    output="screen"
+    respawn="false">
+
+    <param name="result_topic" value="/waste/robot_arm_result"/>
+    <param name="log_path" value="$(arg robot_arm_log_path)"/>
+    <param name="ignore_duplicate_track_ids" value="true"/>
+    <param name="ignore_duplicate_model_names" value="true"/>
+  </node>
+
+  <!-- Realistic 3D object feeder -->
   <node
     pkg="waste_sorting_gazebo"
     type="realistic_conveyor_feeder.py"
