@@ -7,20 +7,21 @@ Dataset camera feeder for the waste sorting robot.
 This node:
   1. Reads YOLO-format dataset samples from datasets/waste_4class/waste_dataset.
   2. Publishes moving synthetic camera frames to /dataset_camera/image_raw.
-  3. Spawns a synchronized Gazebo proxy object named:
+  3. Publishes current sample metadata to /dataset_camera/current_sample.
+  4. Spawns a synchronized Gazebo proxy object named:
        waste_glass_001
        waste_metal_001
        waste_paper_001
        waste_plastic_001
-  4. Applies dataset crop as an OGRE/Gazebo Classic material texture.
+  5. Applies dataset crop as an OGRE/Gazebo Classic material texture.
 
-This version fixes the previous white-card issue by generating:
-  generated_dataset_models/<model_name>/materials/textures/<model_name>.png
-  generated_dataset_models/<model_name>/materials/scripts/<model_name>.material
-
-Then the spawned SDF references that material with:
-  file://.../materials/scripts
-  file://.../materials/textures
+Important production behavior:
+  - Class-balanced round-robin sampling:
+      glass -> metal -> paper -> plastic -> ...
+  - Prevents class starvation in KPI tests.
+  - Generates textured Gazebo proxy models.
+  - Deletes previous waste models before spawning a new synchronized model.
+  - Keeps YOLO image stream and Gazebo model name synchronized.
 """
 
 import glob
@@ -30,7 +31,7 @@ import random
 import shutil
 import sys
 import traceback
-from typing import List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
 
 import cv2
 import numpy as np
@@ -50,6 +51,8 @@ CLASS_ID_TO_NAME = {
 }
 
 VALID_CLASSES = {"glass", "metal", "paper", "plastic"}
+
+CLASS_CYCLE = ["glass", "metal", "paper", "plastic"]
 
 
 class DatasetSample:
@@ -103,7 +106,7 @@ class DatasetCameraFeeder:
         self.fps = float(rospy.get_param("~fps", 10.0))
 
         self.frames_per_object = int(rospy.get_param("~frames_per_object", 45))
-        self.object_width_px = int(rospy.get_param("~object_width_px", 190))
+        self.object_width_px = int(rospy.get_param("~object_width_px", 260))
         self.start_y = int(rospy.get_param("~start_y", 100))
         self.end_y = int(rospy.get_param("~end_y", 355))
         self.object_center_x = int(rospy.get_param("~object_center_x", 320))
@@ -117,21 +120,32 @@ class DatasetCameraFeeder:
         self.gazebo_spawn_y = float(rospy.get_param("~gazebo_spawn_y", 0.0))
         self.gazebo_spawn_z = float(rospy.get_param("~gazebo_spawn_z", 0.18))
 
-        self.proxy_size_x = float(rospy.get_param("~proxy_size_x", 0.36))
-        self.proxy_size_y = float(rospy.get_param("~proxy_size_y", 0.26))
+        self.proxy_size_x = float(rospy.get_param("~proxy_size_x", 0.55))
+        self.proxy_size_y = float(rospy.get_param("~proxy_size_y", 0.38))
         self.proxy_size_z = float(rospy.get_param("~proxy_size_z", 0.018))
 
         self.bridge = CvBridge()
+
         self.pub_image = rospy.Publisher(self.image_topic, Image, queue_size=2)
         self.pub_sample = rospy.Publisher(self.sample_topic, String, queue_size=10)
 
         self.samples: List[DatasetSample] = []
+        self.samples_by_class: Dict[str, List[DatasetSample]] = {
+            "glass": [],
+            "metal": [],
+            "paper": [],
+            "plastic": [],
+        }
+
+        self.class_cycle: List[str] = list(CLASS_CYCLE)
+        self.class_cycle_index: int = 0
+
         self.current_sample: Optional[DatasetSample] = None
         self.current_crop: Optional[np.ndarray] = None
-        self.current_model_name = ""
+        self.current_model_name: str = ""
 
-        self.frame_index = 0
-        self.model_counter = 1
+        self.frame_index: int = 0
+        self.model_counter: int = 1
 
         self.spawn_srv = None
         self.delete_srv = None
@@ -145,6 +159,8 @@ class DatasetCameraFeeder:
             rospy.logfatal("[DATASET CAMERA] dataset_root=%s", self.dataset_root)
             sys.exit(1)
 
+        self.validate_class_availability()
+
         if self.spawn_gazebo_model:
             self.wait_for_gazebo_services()
 
@@ -154,18 +170,18 @@ class DatasetCameraFeeder:
         rospy.loginfo("[DATASET CAMERA] Started")
         rospy.loginfo("[DATASET CAMERA] dataset_root: %s", self.dataset_root)
         rospy.loginfo("[DATASET CAMERA] split: %s", self.split)
-        rospy.loginfo("[DATASET CAMERA] loaded samples: %d", len(self.samples))
+        rospy.loginfo("[DATASET CAMERA] loaded total samples: %d", len(self.samples))
         rospy.loginfo("[DATASET CAMERA] image_topic: %s", self.image_topic)
         rospy.loginfo("[DATASET CAMERA] sample_topic: %s", self.sample_topic)
         rospy.loginfo("[DATASET CAMERA] generated_root: %s", self.generated_root)
         rospy.loginfo("[DATASET CAMERA] frame size: %dx%d", self.width, self.height)
         rospy.loginfo("[DATASET CAMERA] fps: %.1f", self.fps)
+        rospy.loginfo("[DATASET CAMERA] sampling mode: class-balanced round-robin")
         rospy.loginfo("=" * 80)
 
     def prepare_generated_root(self) -> None:
         os.makedirs(self.generated_root, exist_ok=True)
 
-        # Clean only old generated waste folders, not the whole package.
         for path in glob.glob(os.path.join(self.generated_root, "waste_*")):
             if os.path.isdir(path):
                 try:
@@ -195,7 +211,8 @@ class DatasetCameraFeeder:
             rospy.logfatal("[DATASET CAMERA] labels_dir not found: %s", labels_dir)
             return
 
-        image_paths = []
+        image_paths: List[str] = []
+
         for ext in ("*.jpg", "*.jpeg", "*.png", "*.JPG", "*.JPEG", "*.PNG"):
             image_paths.extend(glob.glob(os.path.join(images_dir, ext)))
 
@@ -206,27 +223,53 @@ class DatasetCameraFeeder:
             if not os.path.exists(label_path):
                 continue
 
-            for class_id, x_center, y_center, box_w, box_h in self.read_yolo_label_file(label_path):
+            labels = self.read_yolo_label_file(label_path)
+
+            for class_id, x_center, y_center, box_w, box_h in labels:
                 class_name = CLASS_ID_TO_NAME.get(class_id)
 
                 if class_name not in VALID_CLASSES:
                     continue
 
-                self.samples.append(
-                    DatasetSample(
-                        image_path=image_path,
-                        label_path=label_path,
-                        class_id=class_id,
-                        class_name=class_name,
-                        bbox=(x_center, y_center, box_w, box_h),
-                    )
+                sample = DatasetSample(
+                    image_path=image_path,
+                    label_path=label_path,
+                    class_id=class_id,
+                    class_name=class_name,
+                    bbox=(x_center, y_center, box_w, box_h),
                 )
+
+                self.samples.append(sample)
+                self.samples_by_class[class_name].append(sample)
 
         random.shuffle(self.samples)
 
+        for class_name in self.samples_by_class:
+            random.shuffle(self.samples_by_class[class_name])
+
+        for class_name in self.class_cycle:
+            rospy.loginfo(
+                "[DATASET CAMERA] Loaded %d samples for class=%s",
+                len(self.samples_by_class[class_name]),
+                class_name,
+            )
+
+    def validate_class_availability(self) -> None:
+        missing_classes = []
+
+        for class_name in self.class_cycle:
+            if len(self.samples_by_class.get(class_name, [])) == 0:
+                missing_classes.append(class_name)
+
+        if missing_classes:
+            rospy.logwarn(
+                "[DATASET CAMERA] Some classes have zero samples and will be skipped: %s",
+                missing_classes,
+            )
+
     @staticmethod
     def read_yolo_label_file(label_path: str) -> List[Tuple[int, float, float, float, float]]:
-        labels = []
+        labels: List[Tuple[int, float, float, float, float]] = []
 
         try:
             with open(label_path, "r") as f:
@@ -241,22 +284,53 @@ class DatasetCameraFeeder:
                 continue
 
             try:
-                labels.append(
-                    (
-                        int(float(parts[0])),
-                        float(parts[1]),
-                        float(parts[2]),
-                        float(parts[3]),
-                        float(parts[4]),
-                    )
-                )
+                class_id = int(float(parts[0]))
+                x_center = float(parts[1])
+                y_center = float(parts[2])
+                box_w = float(parts[3])
+                box_h = float(parts[4])
             except Exception:
                 continue
 
+            labels.append((class_id, x_center, y_center, box_w, box_h))
+
         return labels
 
+    def select_balanced_sample(self) -> Optional[DatasetSample]:
+        """
+        Class-balanced round-robin sample selector.
+
+        Selection order:
+          glass -> metal -> paper -> plastic -> ...
+
+        If one class has no samples, it is skipped safely.
+        """
+
+        for _ in range(len(self.class_cycle)):
+            class_name = self.class_cycle[self.class_cycle_index]
+            self.class_cycle_index = (self.class_cycle_index + 1) % len(self.class_cycle)
+
+            class_samples = self.samples_by_class.get(class_name, [])
+
+            if not class_samples:
+                rospy.logwarn_throttle(
+                    5.0,
+                    "[DATASET CAMERA] No samples available for class=%s. Skipping.",
+                    class_name,
+                )
+                continue
+
+            return random.choice(class_samples)
+
+        return None
+
     def select_new_sample(self) -> None:
-        sample = random.choice(self.samples)
+        sample = self.select_balanced_sample()
+
+        if sample is None:
+            rospy.logwarn("[DATASET CAMERA] Balanced sampling failed. Falling back to random sample.")
+            sample = random.choice(self.samples)
+
         image = cv2.imread(sample.image_path, cv2.IMREAD_COLOR)
 
         if image is None:
@@ -300,6 +374,7 @@ class DatasetCameraFeeder:
             "image_path": sample.image_path,
             "label_path": sample.label_path,
             "model_dir": model_dir,
+            "sampling_mode": "class_balanced_round_robin",
         }
 
         self.pub_sample.publish(String(data=json.dumps(payload, sort_keys=True)))
@@ -416,6 +491,9 @@ class DatasetCameraFeeder:
 
         h, w = crop.shape[:2]
 
+        if h <= 0 or w <= 0:
+            return canvas
+
         max_w = 450
         max_h = 450
 
@@ -446,6 +524,7 @@ class DatasetCameraFeeder:
         cv2.line(frame, (belt_x1, belt_y1), (belt_x1, belt_y2), (120, 120, 120), 3)
         cv2.line(frame, (belt_x2, belt_y1), (belt_x2, belt_y2), (120, 120, 120), 3)
 
+        # Visual pick line.
         cv2.line(frame, (belt_x1, self.end_y), (belt_x2, self.end_y), (0, 180, 255), 2)
 
         for y in range(60, self.height - 40, 45):
@@ -465,6 +544,7 @@ class DatasetCameraFeeder:
         center_x = self.object_center_x
 
         ch, cw = crop.shape[:2]
+
         x1 = int(center_x - cw / 2)
         y1 = int(center_y - ch / 2)
         x2 = x1 + cw
@@ -486,14 +566,17 @@ class DatasetCameraFeeder:
         if crop.size != 0:
             frame[y1:y2, x1:x2] = crop
 
-        text = "{} | {}".format(self.current_sample.class_name, self.current_model_name)
+        text = "{} | {} | balanced".format(
+            self.current_sample.class_name,
+            self.current_model_name,
+        )
 
         cv2.putText(
             frame,
             text,
             (18, 30),
             cv2.FONT_HERSHEY_SIMPLEX,
-            0.72,
+            0.70,
             (255, 255, 255),
             2,
             cv2.LINE_AA,
@@ -535,10 +618,6 @@ class DatasetCameraFeeder:
         rospy.loginfo("[DATASET CAMERA] Spawned textured Gazebo model: %s", model_name)
 
     def delete_existing_waste_models(self) -> None:
-        """
-        Delete only models that actually exist.
-        This prevents noisy Gazebo 'model does not exist' errors.
-        """
         if self.world_props_srv is None or self.delete_srv is None:
             return
 

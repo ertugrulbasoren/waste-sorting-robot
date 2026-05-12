@@ -3,7 +3,11 @@
     Full dataset-driven autonomous waste sorting system.
 
     This mode feeds YOLO with real dataset images instead of the raw Gazebo camera.
-    Gazebo still runs for bins, conveyor, and executor model sorting.
+    Gazebo still runs for bins, conveyor, textured proxy models, and executor sorting.
+
+    Balanced evaluation mode:
+      dataset_camera.launch uses split:=train because some validation splits may not
+      contain all four classes equally.
   -->
 
   <arg name="gui" default="true"/>
@@ -23,7 +27,7 @@
 
   <include file="$(find waste_sorting_gazebo)/launch/dataset_camera.launch">
     <arg name="image_topic" value="/dataset_camera/image_raw"/>
-    <arg name="split" value="valid"/>
+    <arg name="split" value="train"/>
     <arg name="fps" value="10.0"/>
   </include>
 
@@ -53,11 +57,10 @@
   <include file="$(find waste_sorting_gazebo)/launch/sort_executor.launch">
     <arg name="pick_event_topic" value="/waste/pick_event"/>
   </include>
-  
-    <include file="$(find waste_sorting_gazebo)/launch/trial_logger.launch">
+
+  <include file="$(find waste_sorting_gazebo)/launch/trial_logger.launch">
     <arg name="sample_topic" value="/dataset_camera/current_sample"/>
     <arg name="detections_topic" value="/waste/detections"/>
     <arg name="pick_event_topic" value="/waste/pick_event"/>
   </include>
-
 </launch>
