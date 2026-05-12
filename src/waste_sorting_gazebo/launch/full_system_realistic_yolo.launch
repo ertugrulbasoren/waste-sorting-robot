@@ -1,0 +1,124 @@
+<launch>
+  <!--
+    Full realistic 3D asset + YOLO pipeline.
+
+    Pipeline:
+      Kinematic realistic Objaverse asset on conveyor
+          ↓
+      /top_camera/image_raw
+          ↓
+      yolo_detector.py
+          ↓
+      /waste/detections
+          ↓
+      tracker_node.py
+          ↓
+      /waste/pick_event
+          ↓
+      pick_event_model_resolver.py
+          ↓
+      /waste/pick_event_resolved
+          ↓
+      sort_executor.py
+
+    Important:
+      YOLO decides class_name.
+      Ground truth is only used to resolve the active Gazebo model_name.
+  -->
+
+  <arg name="gui" default="true"/>
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+
+  <arg name="model_path" default="$(find waste_sorting_gazebo)/models_yolo/best.pt"/>
+
+  <!-- Lower threshold because Gazebo-rendered synthetic objects differ from real photos. -->
+  <arg name="conf_threshold" default="0.10"/>
+
+  <!-- Slow and centered motion for stable camera detection. -->
+  <arg name="spawn_interval_sec" default="10.0"/>
+  <arg name="spawn_x" default="-0.75"/>
+  <arg name="spawn_y" default="0.0"/>
+
+  <arg name="object_bottom_z" default="0.145"/>
+  <arg name="visual_lift" default="0.0"/>
+
+  <arg name="end_x" default="0.20"/>
+  <arg name="conveyor_speed" default="0.10"/>
+
+  <!-- Start Gazebo -->
+  <include file="$(find waste_sorting_gazebo)/launch/sim.launch">
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+  </include>
+
+  <!-- YOLO detector -->
+  <include file="$(find waste_sorting_gazebo)/launch/yolo_detector.launch">
+    <arg name="image_topic" value="/top_camera/image_raw"/>
+    <arg name="model_path" value="$(arg model_path)"/>
+    <arg name="conf_threshold" value="$(arg conf_threshold)"/>
+    <arg name="publish_annotated" value="true"/>
+  </include>
+
+  <!-- Tracker -->
+  <include file="$(find waste_sorting_gazebo)/launch/tracker.launch">
+    <arg name="detections_topic" value="/waste/detections"/>
+    <arg name="legacy_detection_topic" value="/waste/detection"/>
+    <arg name="pick_line_y" value="330.0"/>
+    <arg name="pick_tolerance_px" value="120.0"/>
+    <arg name="min_confirmed_hits" value="2"/>
+  </include>
+
+  <!-- Resolve model_name for realistic feeder objects.
+       This keeps YOLO class_name unchanged. -->
+  <node
+    pkg="waste_sorting_gazebo"
+    type="pick_event_model_resolver.py"
+    name="pick_event_model_resolver"
+    output="screen"
+    respawn="false">
+
+    <param name="ground_truth_topic" value="/waste/current_ground_truth"/>
+    <param name="input_pick_event_topic" value="/waste/pick_event"/>
+    <param name="output_pick_event_topic" value="/waste/pick_event_resolved"/>
+    <param name="max_gt_age_sec" value="15.0"/>
+  </node>
+
+  <!-- Sort executor uses resolved pick events -->
+  <include file="$(find waste_sorting_gazebo)/launch/sort_executor.launch">
+    <arg name="pick_event_topic" value="/waste/pick_event_resolved"/>
+    <arg name="drop_z" value="0.20"/>
+  </include>
+
+  <!-- Kinematic realistic 3D conveyor feeder -->
+  <node
+    pkg="waste_sorting_gazebo"
+    type="realistic_conveyor_feeder.py"
+    name="realistic_conveyor_feeder"
+    output="screen"
+    respawn="false">
+
+    <param name="spawn_interval_sec" value="$(arg spawn_interval_sec)"/>
+
+    <param name="spawn_x" value="$(arg spawn_x)"/>
+    <param name="spawn_y" value="$(arg spawn_y)"/>
+
+    <param name="object_bottom_z" value="$(arg object_bottom_z)"/>
+    <param name="visual_lift" value="$(arg visual_lift)"/>
+
+    <param name="end_x" value="$(arg end_x)"/>
+    <param name="conveyor_speed" value="$(arg conveyor_speed)"/>
+
+    <param name="static_model" value="true"/>
+    <param name="delete_before_spawn" value="true"/>
+
+    <param name="random_y" value="false"/>
+    <param name="random_yaw" value="true"/>
+    <param name="class_mode" value="balanced"/>
+
+    <param name="publish_ground_truth" value="true"/>
+    <param name="ground_truth_topic" value="/waste/current_ground_truth"/>
+    <param name="pick_event_topic" value="/waste/pick_event_resolved"/>
+  </node>
+</launch>

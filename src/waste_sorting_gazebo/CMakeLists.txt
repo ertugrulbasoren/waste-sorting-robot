@@ -101,6 +101,8 @@ catkin_install_python(
     scripts/prepare_realistic_assets.py
     scripts/spawn_realistic_waste.py
     scripts/run_realistic_asset_trials.py
+    scripts/realistic_conveyor_feeder.py
+    scripts/pick_event_model_resolver.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
