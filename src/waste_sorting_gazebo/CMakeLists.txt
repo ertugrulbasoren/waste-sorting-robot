@@ -106,6 +106,7 @@ catkin_install_python(
     scripts/realistic_yolo_kpi_logger.py
     scripts/realistic_synthetic_dataset_collector.py
     scripts/analyze_realistic_yolo_kpi.py
+    scripts/spawn_fake_robot_arm_visual.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
