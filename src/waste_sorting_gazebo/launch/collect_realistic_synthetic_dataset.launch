@@ -1,0 +1,97 @@
+<launch>
+  <!--
+    Collect Gazebo synthetic YOLO dataset from realistic Objaverse assets.
+
+    This launch starts:
+      1. Gazebo
+      2. Synthetic dataset collector
+      3. Realistic feeder after a short delay
+
+    The delay lets the collector learn the empty conveyor background first.
+  -->
+
+  <arg name="gui" default="true"/>
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+
+  <arg name="max_images" default="400"/>
+  <arg name="images_per_object" default="4"/>
+  <arg name="spawn_interval_sec" default="4.0"/>
+
+  <arg name="object_bottom_z" default="0.145"/>
+  <arg name="visual_lift" default="0.0"/>
+
+  <arg name="output_root" default="$(env HOME)/waste-sorting-robot-project/datasets/realistic_synthetic_yolo"/>
+
+  <include file="$(find waste_sorting_gazebo)/launch/sim.launch">
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+  </include>
+
+  <!-- Collector starts immediately and learns background from empty scene. -->
+  <node
+    pkg="waste_sorting_gazebo"
+    type="realistic_synthetic_dataset_collector.py"
+    name="realistic_synthetic_dataset_collector"
+    output="screen"
+    respawn="false">
+
+    <param name="image_topic" value="/top_camera/image_raw"/>
+    <param name="ground_truth_topic" value="/waste/current_ground_truth"/>
+
+    <param name="output_root" value="$(arg output_root)"/>
+    <param name="max_images" value="$(arg max_images)"/>
+    <param name="images_per_object" value="$(arg images_per_object)"/>
+    <param name="capture_interval_sec" value="0.35"/>
+
+    <param name="valid_ratio" value="0.20"/>
+
+    <param name="background_frames_required" value="20"/>
+    <param name="background_diff_threshold" value="22"/>
+
+    <param name="min_bbox_area" value="300"/>
+    <param name="max_bbox_area_ratio" value="0.25"/>
+    <param name="min_bbox_width" value="12"/>
+    <param name="min_bbox_height" value="12"/>
+
+    <param name="roi_x_min_ratio" value="0.0"/>
+    <param name="roi_y_min_ratio" value="0.0"/>
+    <param name="roi_x_max_ratio" value="1.0"/>
+    <param name="roi_y_max_ratio" value="1.0"/>
+
+    <param name="debug" value="true"/>
+  </node>
+
+  <!-- Feeder starts after collector learns background. -->
+  <node
+    pkg="waste_sorting_gazebo"
+    type="realistic_conveyor_feeder.py"
+    name="realistic_conveyor_feeder"
+    output="screen"
+    respawn="false"
+    launch-prefix="bash -c 'sleep 3; exec $0 $@'">
+
+    <param name="spawn_interval_sec" value="$(arg spawn_interval_sec)"/>
+
+    <param name="spawn_x" value="-0.75"/>
+    <param name="spawn_y" value="0.0"/>
+
+    <param name="object_bottom_z" value="$(arg object_bottom_z)"/>
+    <param name="visual_lift" value="$(arg visual_lift)"/>
+
+    <param name="end_x" value="0.20"/>
+    <param name="conveyor_speed" value="0.10"/>
+
+    <param name="static_model" value="true"/>
+    <param name="delete_before_spawn" value="true"/>
+
+    <param name="random_y" value="false"/>
+    <param name="random_yaw" value="true"/>
+    <param name="class_mode" value="balanced"/>
+
+    <param name="publish_ground_truth" value="true"/>
+    <param name="ground_truth_topic" value="/waste/current_ground_truth"/>
+    <param name="pick_event_topic" value="/waste/pick_event_resolved"/>
+  </node>
+</launch>

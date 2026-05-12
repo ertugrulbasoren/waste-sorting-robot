@@ -39,3 +39,7 @@ src/waste_sorting_gazebo/raw_assets/*/*/
 # Prepared realistic 3D mesh assets can be large
 src/waste_sorting_gazebo/models/realistic_assets/*/*/
 !src/waste_sorting_gazebo/models/realistic_assets/*/.gitkeep
+
+# Synthetic YOLO datasets generated locally
+datasets/realistic_synthetic_yolo/
+datasets/realistic_synthetic_yolo_*/
