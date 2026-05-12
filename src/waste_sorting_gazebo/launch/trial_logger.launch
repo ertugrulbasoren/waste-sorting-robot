@@ -1,0 +1,22 @@
+<launch>
+  <!-- Logs dataset samples, YOLO detections and pick events into CSV. -->
+
+  <arg name="sample_topic" default="/dataset_camera/current_sample"/>
+  <arg name="detections_topic" default="/waste/detections"/>
+  <arg name="pick_event_topic" default="/waste/pick_event"/>
+  <arg name="log_dir" default="$(find waste_sorting_gazebo)/../../../logs/trials"/>
+
+  <node
+    pkg="waste_sorting_gazebo"
+    type="trial_logger.py"
+    name="trial_logger"
+    output="screen"
+    respawn="true"
+    respawn_delay="2.0">
+
+    <param name="sample_topic" value="$(arg sample_topic)"/>
+    <param name="detections_topic" value="$(arg detections_topic)"/>
+    <param name="pick_event_topic" value="$(arg pick_event_topic)"/>
+    <param name="log_dir" value="$(arg log_dir)"/>
+  </node>
+</launch>

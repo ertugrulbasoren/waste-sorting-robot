@@ -95,6 +95,7 @@ catkin_install_python(
     scripts/spawn_sequence.py
     scripts/arm_pick_place.py
     scripts/sim_detector.py
+    scripts/trial_logger.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
