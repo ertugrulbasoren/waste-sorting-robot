@@ -26,3 +26,16 @@ devel/
 
 # External 3D dataset tools
 external_tools/
+
+# Objaverse metadata/cache
+.objaverse_cache/
+asset_candidates/*.parquet
+asset_candidates/*.jsonl
+
+# Downloaded raw 3D assets can be large
+src/waste_sorting_gazebo/raw_assets/*/*/
+!src/waste_sorting_gazebo/raw_assets/*/.gitkeep
+
+# Prepared realistic 3D mesh assets can be large
+src/waste_sorting_gazebo/models/realistic_assets/*/*/
+!src/waste_sorting_gazebo/models/realistic_assets/*/.gitkeep

@@ -1,0 +1,124 @@
+<launch>
+  <!--
+    Realistic Objaverse 3D asset demo.
+
+    This launch:
+      1. Starts Gazebo simulation.
+      2. Spawns four real Objaverse-based 3D waste assets.
+      3. Starts sort_executor.
+      4. Keeps assets static by default for clean visual demo.
+
+    Important:
+      spawn_z and drop_z are tuned for OBJ-converted Objaverse assets.
+      Earlier values around 0.11 caused some assets to look embedded in the belt.
+  -->
+
+  <arg name="gui" default="true"/>
+  <arg name="paused" default="true"/>
+  <arg name="use_sim_time" default="true"/>
+
+  <!-- Static true = clean visual demo mode.
+       Static false = physics/conveyor experiment mode. -->
+  <arg name="static_model" default="true"/>
+
+  <!-- Tuned for realistic OBJ assets.
+       If an object looks embedded, increase to 0.22.
+       If an object floats too high, decrease to 0.17. -->
+  <arg name="spawn_z" default="0.20"/>
+
+  <!-- Drop height used by sort_executor when moving objects into bins. -->
+  <arg name="drop_z" default="0.20"/>
+
+  <!-- Start Gazebo -->
+  <include file="$(find waste_sorting_gazebo)/launch/sim.launch">
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+  </include>
+
+  <!-- Start sort executor -->
+  <include file="$(find waste_sorting_gazebo)/launch/sort_executor.launch">
+    <arg name="pick_event_topic" value="/waste/pick_event"/>
+    <arg name="drop_z" value="$(arg drop_z)"/>
+  </include>
+
+  <!-- Glass asset -->
+  <node
+    pkg="waste_sorting_gazebo"
+    type="spawn_realistic_asset.py"
+    name="spawn_realistic_glass_asset"
+    output="screen"
+    respawn="false">
+    <param name="class_name" value="glass"/>
+    <param name="asset_folder" value="glass_b9616981"/>
+    <param name="model_index" value="1"/>
+    <param name="x" value="-0.70"/>
+    <param name="y" value="0.00"/>
+    <param name="z" value="$(arg spawn_z)"/>
+    <param name="random_y" value="false"/>
+    <param name="random_yaw" value="false"/>
+    <param name="force_on_belt" value="true"/>
+    <param name="static_model" value="$(arg static_model)"/>
+    <param name="delete_existing_same_name" value="true"/>
+  </node>
+
+  <!-- Metal asset -->
+  <node
+    pkg="waste_sorting_gazebo"
+    type="spawn_realistic_asset.py"
+    name="spawn_realistic_metal_asset"
+    output="screen"
+    respawn="false">
+    <param name="class_name" value="metal"/>
+    <param name="asset_folder" value="metal_36c25d21"/>
+    <param name="model_index" value="1"/>
+    <param name="x" value="-0.45"/>
+    <param name="y" value="0.00"/>
+    <param name="z" value="$(arg spawn_z)"/>
+    <param name="random_y" value="false"/>
+    <param name="random_yaw" value="false"/>
+    <param name="force_on_belt" value="true"/>
+    <param name="static_model" value="$(arg static_model)"/>
+    <param name="delete_existing_same_name" value="true"/>
+  </node>
+
+  <!-- Paper asset -->
+  <node
+    pkg="waste_sorting_gazebo"
+    type="spawn_realistic_asset.py"
+    name="spawn_realistic_paper_asset"
+    output="screen"
+    respawn="false">
+    <param name="class_name" value="paper"/>
+    <param name="asset_folder" value="paper_5cb4d016"/>
+    <param name="model_index" value="1"/>
+    <param name="x" value="-0.20"/>
+    <param name="y" value="0.00"/>
+    <param name="z" value="$(arg spawn_z)"/>
+    <param name="random_y" value="false"/>
+    <param name="random_yaw" value="false"/>
+    <param name="force_on_belt" value="true"/>
+    <param name="static_model" value="$(arg static_model)"/>
+    <param name="delete_existing_same_name" value="true"/>
+  </node>
+
+  <!-- Plastic asset -->
+  <node
+    pkg="waste_sorting_gazebo"
+    type="spawn_realistic_asset.py"
+    name="spawn_realistic_plastic_asset"
+    output="screen"
+    respawn="false">
+    <param name="class_name" value="plastic"/>
+    <param name="asset_folder" value="plastic_42827e2c"/>
+    <param name="model_index" value="1"/>
+    <param name="x" value="0.05"/>
+    <param name="y" value="0.00"/>
+    <param name="z" value="$(arg spawn_z)"/>
+    <param name="random_y" value="false"/>
+    <param name="random_yaw" value="false"/>
+    <param name="force_on_belt" value="true"/>
+    <param name="static_model" value="$(arg static_model)"/>
+    <param name="delete_existing_same_name" value="true"/>
+  </node>
+</launch>

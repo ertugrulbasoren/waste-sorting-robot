@@ -1,0 +1,284 @@
+====================================================================================================
+OBJAVERSE CANDIDATE REVIEW - GLASS
+====================================================================================================
+
+Review rule:
+  Keep assets that are visually recognizable as glass waste.
+  Avoid irrelevant models, buildings, characters, logos, masks, machines, etc.
+  Prefer licenses: by, cc0, public domain. Be careful with by-nc.
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 1
+CLASS          : glass
+MATCHED PHRASE : beer bottle
+UID            : b9616981f2a54dacb38d3c45b81f32c3
+NAME           : Beer Bottle
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : beer bottle [{"name": "substancepainter", "slug": "substancepainter", "uri": "https://api.sketchfab.com/v3/tags/substancepainter"}, {"name": "substance", "slug": "substance", "uri": "https://api.sketchfab.com/v3/tags/substance"}] [] by b9616981f2a54dacb38d3c45b81f32c3
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 2
+CLASS          : glass
+MATCHED PHRASE : wine bottle
+UID            : 8e6d86cdaa094df0adc7077f061f8aad
+NAME           : Bottle2020
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : bottle2020 med poly wine bottle with wicker bottom [] [{"name": "food-drink"}] by 8e6d86cdaa094df0adc7077f061f8aad
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 3
+CLASS          : glass
+MATCHED PHRASE : wine bottle
+UID            : c2fee894e0d04f4ca2888b57e56ab381
+NAME           : Wine Bottle
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : wine bottle 3d low poly wine bottle. inspired from pirate rum bottles. you are allowed to use it for your animation or else as long as you quote me. if there are any problems with the 3d model let me now so i can help you. [{"name": "green", "slug": "green", "uri": "https://api.sketchfab.com/v3/tags
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 4
+CLASS          : glass
+MATCHED PHRASE : wine bottle
+UID            : 72f5d79f44a7452fbc181845c137ec71
+NAME           : Wine Bottle
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : wine bottle [{"name": "wine", "slug": "wine", "uri": "https://api.sketchfab.com/v3/tags/wine"}, {"name": "winebottle", "slug": "winebottle", "uri": "https://api.sketchfab.com/v3/tags/winebottle"}, {"name": "maya3d", "slug": "maya3d", "uri": "https://api.sketchfab.com/v3/tags/maya3d"}, {"name": "glas
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 5
+CLASS          : glass
+MATCHED PHRASE : glass bottle
+UID            : 90e32c34f1794167865cfa4e8b0ab0f2
+NAME           : Glass Bottle
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : glass bottle [] [{"name": "characters-creatures"}, {"name": "electronics-gadgets"}] by 90e32c34f1794167865cfa4e8b0ab0f2
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 6
+CLASS          : glass
+MATCHED PHRASE : wine bottle
+UID            : 9d3d08c653e240d8a2b1327f1b57ff72
+NAME           : Ancient Wine Bottle
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : ancient wine bottle [{"name": "ct4012-2020", "slug": "ct4012-2020", "uri": "https://api.sketchfab.com/v3/tags/ct4012-2020"}] [{"name": "food-drink"}] by 9d3d08c653e240d8a2b1327f1b57ff72
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 7
+CLASS          : glass
+MATCHED PHRASE : glass bottle
+UID            : f01b27b603d14e769f56b7e83ddfb65a
+NAME           : Simple Glass Bottle
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : simple glass bottle here is a simple glass bottle i created, hope you like it :p. [{"name": "bottle", "slug": "bottle", "uri": "https://api.sketchfab.com/v3/tags/bottle"}] [{"name": "art-abstract"}, {"name": "food-drink"}] by f01b27b603d14e769f56b7e83ddfb65a
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 8
+CLASS          : glass
+MATCHED PHRASE : wine bottle
+UID            : c810196bb3224ed2804084d77577336b
+NAME           : Wine Bottle
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : wine bottle made in class. [{"name": "wine", "slug": "wine", "uri": "https://api.sketchfab.com/v3/tags/wine"}, {"name": "opacity", "slug": "opacity", "uri": "https://api.sketchfab.com/v3/tags/opacity"}, {"name": "low_poly", "slug": "low_poly", "uri": "https://api.sketchfab.com/v3/tags/low_poly"}, {"
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 9
+CLASS          : glass
+MATCHED PHRASE : beer bottle
+UID            : 9668b2004b8847b28232eab6d1f22068
+NAME           : Low Poly Beer Bottle
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : low poly beer bottle a **low poly beer bottle** made in blender. enough said. [{"name": "beerbottle", "slug": "beerbottle", "uri": "https://api.sketchfab.com/v3/tags/beerbottle"}, {"name": "lowpoly", "slug": "lowpoly", "uri": "https://api.sketchfab.com/v3/tags/lowpoly"}, {"name": "bottle", "slug": "
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 10
+CLASS          : glass
+MATCHED PHRASE : glass bottle
+UID            : 1cc76a57330f409b8a1972953082bde1
+NAME           : Glass bottle
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : glass bottle seem like i wrong some where. [{"name": "blender3dmodel", "slug": "blender3dmodel", "uri": "https://api.sketchfab.com/v3/tags/blender3dmodel"}] [{"name": "food-drink"}] by 1cc76a57330f409b8a1972953082bde1
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 11
+CLASS          : glass
+MATCHED PHRASE : wine bottle
+UID            : 8e6b587bf84840b59ac34da29660c492
+NAME           : Medieval Wine Bottle (Low Poly)
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : medieval wine bottle (low poly) [{"name": "substancepainter", "slug": "substancepainter", "uri": "https://api.sketchfab.com/v3/tags/substancepainter"}, {"name": "substance", "slug": "substance", "uri": "https://api.sketchfab.com/v3/tags/substance"}] [] by 8e6b587bf84840b59ac34da29660c492
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 12
+CLASS          : glass
+MATCHED PHRASE : wine bottle
+UID            : dd1a542814ec4121ae8a97efd30c951d
+NAME           : WineBottle Smashed
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : winebottle smashed a wine bottle labelled "martyr sir arthur", smashed [{"name": "substancepainter", "slug": "substancepainter", "uri": "https://api.sketchfab.com/v3/tags/substancepainter"}, {"name": "substance", "slug": "substance", "uri": "https://api.sketchfab.com/v3/tags/substance"}] [] by dd1a5
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 13
+CLASS          : glass
+MATCHED PHRASE : wine bottle
+UID            : 90f7ee8778624769a918f833bf7e00a4
+NAME           : Wine Bottle
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : wine bottle wine bottle modeled for class. [{"name": "wine", "slug": "wine", "uri": "https://api.sketchfab.com/v3/tags/wine"}, {"name": "winebottle", "slug": "winebottle", "uri": "https://api.sketchfab.com/v3/tags/winebottle"}, {"name": "bottle", "slug": "bottle", "uri": "https://api.sketchfab.com/v
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 14
+CLASS          : glass
+MATCHED PHRASE : wine bottle
+UID            : 53cc3d38d3ea41e285e53e41bb2d624e
+NAME           : Wine Bottle
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : wine bottle [] [] by 53cc3d38d3ea41e285e53e41bb2d624e
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 15
+CLASS          : glass
+MATCHED PHRASE : glass bottle
+UID            : beb69bc08a8f487ab8c5207fb155cbf2
+NAME           : Glass Bottle
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : glass bottle [{"name": "glass", "slug": "glass", "uri": "https://api.sketchfab.com/v3/tags/glass"}, {"name": "bottle", "slug": "bottle", "uri": "https://api.sketchfab.com/v3/tags/bottle"}] [{"name": "furniture-home"}] by beb69bc08a8f487ab8c5207fb155cbf2
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 16
+CLASS          : glass
+MATCHED PHRASE : glass bottle
+UID            : f9af6208d60340699052594b0a18baa1
+NAME           : 1905_vaseline+soya milk
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : 1905_vaseline+soya milk glass bottle covered in vaseline and filled with soya milk [] [{"name": "furniture-home"}] by f9af6208d60340699052594b0a18baa1
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 17
+CLASS          : glass
+MATCHED PHRASE : wine bottle
+UID            : 792dbf6bfa35449ea6b5b8dc6c090825
+NAME           : Wine Bottle
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : wine bottle wine bottle made for a university project. [{"name": "wine", "slug": "wine", "uri": "https://api.sketchfab.com/v3/tags/wine"}, {"name": "university", "slug": "university", "uri": "https://api.sketchfab.com/v3/tags/university"}, {"name": "unreal", "slug": "unreal", "uri": "https://api.ske
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 18
+CLASS          : glass
+MATCHED PHRASE : glass bottle
+UID            : f2adc7ee40cc45a5acb094194ae4c4cd
+NAME           : mushroom in a bottle_bystblend
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : mushroom in a bottle_bystblend ![renderd image in cycles](https://i.ibb.co/dkns4bf/mushroom-in-abottle.png) the 3d view is not correct in sketchfab thats why the bottle is not glass but in blender in renderd view you will get transparent glass bottle. if you want to move bottle select all object in
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 19
+CLASS          : glass
+MATCHED PHRASE : wine bottle
+UID            : 2303628f0243427bbe81c51dda60aab4
+NAME           : Wine Bottle
+LICENSE        : by-nc
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : wine bottle [{"name": "wine", "slug": "wine", "uri": "https://api.sketchfab.com/v3/tags/wine"}, {"name": "lowpoly", "slug": "lowpoly", "uri": "https://api.sketchfab.com/v3/tags/lowpoly"}, {"name": "bottle", "slug": "bottle", "uri": "https://api.sketchfab.com/v3/tags/bottle"}] [] by-nc 2303628f024342
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 20
+CLASS          : glass
+MATCHED PHRASE : glass bottle
+UID            : c6e3348739f04e6fb21e76086e3ecd4c
+NAME           : Glass Bottle Of Neatsfoot Oil: EOA:2022.112.7
+LICENSE        : by-nc-sa
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : glass bottle of neatsfoot oil: eoa:2022.112.7 glass bottle of neatsfoot oil from the wreck of the earl of abergavenny. id: eoa:2022.112.7 collection: earl of abergavenny classification: trade/crew/military measurements: width 75mm length 219mm date made: as yet unknown display: not on display manufa
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 21
+CLASS          : glass
+MATCHED PHRASE : wine bottle
+UID            : 0d1289a641b74b3497faea4a74f64669
+NAME           : Valdemar bottle (Comission)
+LICENSE        : by-nc
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : valdemar bottle (comission) valdemar wine bottle. [{"name": "wine", "slug": "wine", "uri": "https://api.sketchfab.com/v3/tags/wine"}, {"name": "substancepainter", "slug": "substancepainter", "uri": "https://api.sketchfab.com/v3/tags/substancepainter"}, {"name": "substance", "slug": "substance", "uri
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 22
+CLASS          : glass
+MATCHED PHRASE : glass bottle
+UID            : 6bb41eb613c44447a3613130a5366f9e
+NAME           : 1905_sticky notes
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : 1905_sticky notes glass bottle covered in sticky notes [] [{"name": "furniture-home"}] by 6bb41eb613c44447a3613130a5366f9e
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 23
+CLASS          : glass
+MATCHED PHRASE : broken bottle
+UID            : 692152eb84834bc9b3c8d3fb74fe6069
+NAME           : Broken Bottle 2
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : broken bottle 2 [] [] by 692152eb84834bc9b3c8d3fb74fe6069
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 24
+CLASS          : glass
+MATCHED PHRASE : wine bottle
+UID            : d03766ba61f2468aa95709ce84b5a4e4
+NAME           : Wine Bottle Burgundy Style
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : wine bottle burgundy style small project i did as a gamedev asset, feel free to use, it's nothing too complex; no cork, no label. [{"name": "wine", "slug": "wine", "uri": "https://api.sketchfab.com/v3/tags/wine"}, {"name": "burgundy", "slug": "burgundy", "uri": "https://api.sketchfab.com/v3/tags/bur
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 25
+CLASS          : glass
+MATCHED PHRASE : broken glass
+UID            : a156bca89fb14a0086024e6f332e764e
+NAME           : Glass Neck With Stopper: EOA:2022.2.5
+LICENSE        : by-nc-sa
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : glass neck with stopper: eoa:2022.2.5 glass neck with stopper from the wreck of the earl of abergavenny. id: eoa:2022.2.5 collection: earl of abergavenny classification: trade measurements: diametre 30mm height 70mm date made: as yet unknown display: not on display manufacturer/creator: as yet unkno
+

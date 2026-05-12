@@ -1,0 +1,284 @@
+====================================================================================================
+OBJAVERSE CANDIDATE REVIEW - METAL
+====================================================================================================
+
+Review rule:
+  Keep assets that are visually recognizable as metal waste.
+  Avoid irrelevant models, buildings, characters, logos, masks, machines, etc.
+  Prefer licenses: by, cc0, public domain. Be careful with by-nc.
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 1
+CLASS          : metal
+MATCHED PHRASE : aluminium can
+UID            : 08468b5b1ca04f7dbe4bfe8cfa1a65c9
+NAME           : Aluminium can (3D test)
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : aluminium can (3d test) can [{"name": "maya", "slug": "maya", "uri": "https://api.sketchfab.com/v3/tags/maya"}] [] by 08468b5b1ca04f7dbe4bfe8cfa1a65c9
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 2
+CLASS          : metal
+MATCHED PHRASE : soda can
+UID            : 7a54b5302f40454590e876a76146ad80
+NAME           : Soda Can
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : soda can soda can i made for a uni assignment. [{"name": "drink", "slug": "drink", "uri": "https://api.sketchfab.com/v3/tags/drink"}, {"name": "food", "slug": "food", "uri": "https://api.sketchfab.com/v3/tags/food"}, {"name": "soda", "slug": "soda", "uri": "https://api.sketchfab.com/v3/tags/soda"},
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 3
+CLASS          : metal
+MATCHED PHRASE : tin can
+UID            : 0b69e10add604138a3abfddc55c2b5be
+NAME           : Old retro motor oil tin can
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : old retro motor oil tin can an old tin can of automotive engine oil. a little crumpled, a little scratched and a cute retro print. [{"name": "automobile", "slug": "automobile", "uri": "https://api.sketchfab.com/v3/tags/automobile"}, {"name": "oil", "slug": "oil", "uri": "https://api.sketchfab.com/v3
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 4
+CLASS          : metal
+MATCHED PHRASE : metal can
+UID            : 78a20f91b8be489baf8c3bb7d7422a8b
+NAME           : Geometry Metal Complexes
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : geometry metal complexes models obtained from clauter and modified to suit metal complexes' common geometries. the coordination number is used to suggest possible geometries. the size of the ligand and the metal can deterimine which one is prefered. sometimes the complex has a mixture of geometries.
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 5
+CLASS          : metal
+MATCHED PHRASE : coke can
+UID            : bbbb22f40d6a49148db682ff9f2da9fe
+NAME           : Diet Coke Can Color 3D Scan
+LICENSE        : by-nc
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : diet coke can color 3d scan can of diet coke, 3d scanned in color with the artec space spider 3d scanner. total time to scan: 60 seconds total time to process to watertight .obj with color: about 10 minutes see version 2 here: https://sketchfab.com/3d-models/diet-coke-can-version-2-color-3d-scan-949
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 6
+CLASS          : metal
+MATCHED PHRASE : soda can
+UID            : 8b92426659dc4b0eb303c7d7280727b8
+NAME           : Soda can
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : soda can coca cola can camera model: zivid one+ small working distance: 500mm [{"name": "scanner", "slug": "scanner", "uri": "https://api.sketchfab.com/v3/tags/scanner"}, {"name": "can", "slug": "can", "uri": "https://api.sketchfab.com/v3/tags/can"}, {"name": "cola", "slug": "cola", "uri": "https://
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 7
+CLASS          : metal
+MATCHED PHRASE : tin can
+UID            : 8c375ece6c444908bf8bfe784c332d30
+NAME           : Tin can banjo
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : tin can banjo from cookie box) automapping [{"name": "study", "slug": "study", "uri": "https://api.sketchfab.com/v3/tags/study"}, {"name": "xyz-school", "slug": "xyz-school", "uri": "https://api.sketchfab.com/v3/tags/xyz-school"}] [{"name": "music"}] by 8c375ece6c444908bf8bfe784c332d30
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 8
+CLASS          : metal
+MATCHED PHRASE : soda can
+UID            : 4e5d012176e5459d9b8cad929999072e
+NAME           : Soda can from Poly by Google
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : soda can from poly by google this is a backup of a poly asset named soda can. saved from poly by google. preview may be without textures, they are still in the download zip with a preview thumbnail. [{"name": "google", "slug": "google", "uri": "https://api.sketchfab.com/v3/tags/google"}, {"name": "v
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 9
+CLASS          : metal
+MATCHED PHRASE : beer can
+UID            : 2f16d399a5cd46139bc74643342ce8e7
+NAME           : rusty beer can (low poly)
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : rusty beer can (low poly) rusty beer can in low poly ideal for video games, vr etc... [{"name": "vr", "slug": "vr", "uri": "https://api.sketchfab.com/v3/tags/vr"}, {"name": "ue4", "slug": "ue4", "uri": "https://api.sketchfab.com/v3/tags/ue4"}, {"name": "unrealengine4", "slug": "unrealengine4", "uri"
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 10
+CLASS          : metal
+MATCHED PHRASE : cola can
+UID            : 78c22afa5212423690b5712b40bdfa5f
+NAME           : Rusty Coka Cola Can
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : rusty coka cola can rusty coka cola can. modeled in may 2017 and textured in 3d coat. [{"name": "drink", "slug": "drink", "uri": "https://api.sketchfab.com/v3/tags/drink"}, {"name": "rust", "slug": "rust", "uri": "https://api.sketchfab.com/v3/tags/rust"}, {"name": "rusty", "slug": "rusty", "uri": "h
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 11
+CLASS          : metal
+MATCHED PHRASE : tin can
+UID            : 3d97cd65e13641a4a63f78490c748e18
+NAME           : Tin Can
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : tin can [{"name": "cylinder", "slug": "cylinder", "uri": "https://api.sketchfab.com/v3/tags/cylinder"}, {"name": "tube", "slug": "tube", "uri": "https://api.sketchfab.com/v3/tags/tube"}, {"name": "can", "slug": "can", "uri": "https://api.sketchfab.com/v3/tags/can"}, {"name": "tin", "slug": "tin", "u
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 12
+CLASS          : metal
+MATCHED PHRASE : cola can
+UID            : a169b9d5818245168ea45e568fde3551
+NAME           : Coca Cola Can
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : coca cola can coca cola can 3d model [{"name": "drink", "slug": "drink", "uri": "https://api.sketchfab.com/v3/tags/drink"}, {"name": "can", "slug": "can", "uri": "https://api.sketchfab.com/v3/tags/can"}, {"name": "coca", "slug": "coca", "uri": "https://api.sketchfab.com/v3/tags/coca"}, {"name": "coc
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 13
+CLASS          : metal
+MATCHED PHRASE : coke can
+UID            : 7801926855924780bd4269c671cf0fae
+NAME           : Coke Can
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : coke can [] [] by 7801926855924780bd4269c671cf0fae
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 14
+CLASS          : metal
+MATCHED PHRASE : soda can
+UID            : 36c25d2118bf44488ad8d6faf7fce037
+NAME           : Soda Can
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : soda can a can of soda. gluten-free as well! made in maya 2016. textured in gimp. trying to learn how to use gimp. [{"name": "can", "slug": "can", "uri": "https://api.sketchfab.com/v3/tags/can"}, {"name": "soda", "slug": "soda", "uri": "https://api.sketchfab.com/v3/tags/soda"}, {"name": "soda-can",
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 15
+CLASS          : metal
+MATCHED PHRASE : soda can
+UID            : a0a1eaf4185c440c816bc085f1af4bfb
+NAME           : 7UP Soda Can
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : 7up soda can 7up in a can. [{"name": "cans", "slug": "cans", "uri": "https://api.sketchfab.com/v3/tags/cans"}] [{"name": "furniture-home"}] by a0a1eaf4185c440c816bc085f1af4bfb
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 16
+CLASS          : metal
+MATCHED PHRASE : soda can
+UID            : aaa11e57064848268d701a3586792d0d
+NAME           : Simple Cola Can
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : simple cola can here is another soda can i created, but this time with better detail. took meh 3 hours but was worth it, hope you like it :p. [{"name": "drink", "slug": "drink", "uri": "https://api.sketchfab.com/v3/tags/drink"}, {"name": "prop", "slug": "prop", "uri": "https://api.sketchfab.com/v3/t
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 17
+CLASS          : metal
+MATCHED PHRASE : soda can
+UID            : fecd4450f9d14948ba05d6d8dcec883c
+NAME           : Soda Can
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : soda can ***cool & refreshing*** downloadable for the nerds who really want this [{"name": "drink", "slug": "drink", "uri": "https://api.sketchfab.com/v3/tags/drink"}, {"name": "food", "slug": "food", "uri": "https://api.sketchfab.com/v3/tags/food"}, {"name": "can", "slug": "can", "uri": "https://ap
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 18
+CLASS          : metal
+MATCHED PHRASE : soda can
+UID            : 0db78b8bfcdb4c559b3bc8f63cbb5689
+NAME           : Cans!
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : cans! - soda can - beer can - sardine can - beans can modeled in blender 2.82 [{"name": "can", "slug": "can", "uri": "https://api.sketchfab.com/v3/tags/can"}, {"name": "beer", "slug": "beer", "uri": "https://api.sketchfab.com/v3/tags/beer"}, {"name": "soda", "slug": "soda", "uri": "https://api.sketc
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 19
+CLASS          : metal
+MATCHED PHRASE : cola can
+UID            : 18326cd8315c4712ab5d880efe79b44d
+NAME           : Cola Can
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : cola can cola can textures 2k [{"name": "can", "slug": "can", "uri": "https://api.sketchfab.com/v3/tags/can"}, {"name": "cola", "slug": "cola", "uri": "https://api.sketchfab.com/v3/tags/cola"}, {"name": "cola-bottle", "slug": "cola-bottle", "uri": "https://api.sketchfab.com/v3/tags/cola-bottle"}] [{
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 20
+CLASS          : metal
+MATCHED PHRASE : soda can
+UID            : 2cf41e5ed76c409a9966c4828246ee45
+NAME           : Soft Drink Yellow
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : soft drink yellow coughs hold on let me get a sip opens up soda can by latenighttyping gulp ahhh that tastes like card board. besides the taste these drinks are ay okay for people who don’t like logos on their games. this is a low poly pack. so those of you who still program games on windows 95 i go
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 21
+CLASS          : metal
+MATCHED PHRASE : soda can
+UID            : 4551ff1f90244f9c80c7e79a0206f717
+NAME           : Soda Can
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : soda can [] [] by 4551ff1f90244f9c80c7e79a0206f717
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 22
+CLASS          : metal
+MATCHED PHRASE : soda can
+UID            : 020f20e5150a45cbbeeb64581129a9f1
+NAME           : Soda can ARt
+LICENSE        : by-nc-sa
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : soda can art gartbage created with polycam [{"name": "polycam", "slug": "polycam", "uri": "https://api.sketchfab.com/v3/tags/polycam"}] [] by-nc-sa 020f20e5150a45cbbeeb64581129a9f1
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 23
+CLASS          : metal
+MATCHED PHRASE : coke can
+UID            : bbe354abb6714da9b5a405487a2987ac
+NAME           : Coke Can
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : coke can high poly model of a can of coke. [] [] by bbe354abb6714da9b5a405487a2987ac
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 24
+CLASS          : metal
+MATCHED PHRASE : coke can
+UID            : 715f375555634780890d84a00a2007ec
+NAME           : Coke Can
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : coke can photoreal coke can ideal for packshots and animation [{"name": "substancepainter", "slug": "substancepainter", "uri": "https://api.sketchfab.com/v3/tags/substancepainter"}, {"name": "substance", "slug": "substance", "uri": "https://api.sketchfab.com/v3/tags/substance"}] [] by 715f3755556347
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 25
+CLASS          : metal
+MATCHED PHRASE : cola can
+UID            : 552ef2ca1da644cb98bcf618f10e2b12
+NAME           : Coca-Cola
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : coca-cola this is the coca-cola can [{"name": "can", "slug": "can", "uri": "https://api.sketchfab.com/v3/tags/can"}, {"name": "coke", "slug": "coke", "uri": "https://api.sketchfab.com/v3/tags/coke"}, {"name": "cocacola", "slug": "cocacola", "uri": "https://api.sketchfab.com/v3/tags/cocacola"}, {"nam
+

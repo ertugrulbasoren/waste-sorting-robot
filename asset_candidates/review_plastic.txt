@@ -1,0 +1,284 @@
+====================================================================================================
+OBJAVERSE CANDIDATE REVIEW - PLASTIC
+====================================================================================================
+
+Review rule:
+  Keep assets that are visually recognizable as plastic waste.
+  Avoid irrelevant models, buildings, characters, logos, masks, machines, etc.
+  Prefer licenses: by, cc0, public domain. Be careful with by-nc.
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 1
+CLASS          : plastic
+MATCHED PHRASE : plastic bag
+UID            : a6aa2be5b93249bd9b004a49ec012700
+NAME           : Cat Food Bag
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : cat food bag textured cat food bag for an upcoming project. plastic bag texture by [julio sillet 3d art](https://juliovii.itch.io/plasticpk01), licensed under cc-by contains royalty free images from pexels.com please credit jku.itch.io [{"name": "food", "slug": "food", "uri": "https://api.sketchfab.
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 2
+CLASS          : plastic
+MATCHED PHRASE : water bottle
+UID            : 1f1cd422af2044aaa97aa158c18c436d
+NAME           : Plastic water bottle
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : plastic water bottle beginner's work. made in blender. [{"name": "water", "slug": "water", "uri": "https://api.sketchfab.com/v3/tags/water"}, {"name": "realism", "slug": "realism", "uri": "https://api.sketchfab.com/v3/tags/realism"}, {"name": "blender", "slug": "blender", "uri": "https://api.sketchf
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 3
+CLASS          : plastic
+MATCHED PHRASE : plastic bag
+UID            : 054baa912618411dae63032adc378e13
+NAME           : Airtight Plastic Bag
+LICENSE        : by-nc
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : airtight plastic bag airtight plastic bags this is a template for you ready to use cc0 [{"name": "bag", "slug": "bag", "uri": "https://api.sketchfab.com/v3/tags/bag"}, {"name": "plastico", "slug": "plastico", "uri": "https://api.sketchfab.com/v3/tags/plastico"}, {"name": "bolsa", "slug": "bolsa", "u
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 4
+CLASS          : plastic
+MATCHED PHRASE : water bottle
+UID            : a0defbb52cd24dfbbea251c3d74dec20
+NAME           : Water Bottle
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : water bottle [] [] by a0defbb52cd24dfbbea251c3d74dec20
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 5
+CLASS          : plastic
+MATCHED PHRASE : water bottle
+UID            : 3bfd8ae7f7494849be9aa650d2c25006
+NAME           : Water bottle
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : water bottle this is a glass water bottle with a screw cap, i have render the image, at this link ---> https://drive.google.com/file/d/1efhizecddnfcrkfb0ocrbukiccsq85nq/view?usp=sharing [{"name": "water", "slug": "water", "uri": "https://api.sketchfab.com/v3/tags/water"}, {"name": "waterbottle", "sl
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 6
+CLASS          : plastic
+MATCHED PHRASE : plastic bottle
+UID            : fd281a5513594269a2b2932b5370869f
+NAME           : Plastic Bottle - Real Life Replica
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : plastic bottle - real life replica plastic bottle. 17,288 triangles 8,890 faces 8,759 verts thanks for downloading this bottle and you are free to use it as you wish to. do remember to credit my work if you want to ofcourse. [{"name": "replica", "slug": "replica", "uri": "https://api.sketchfab.com/v
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 7
+CLASS          : plastic
+MATCHED PHRASE : water bottle
+UID            : 42827e2ce39145eda296e6d6524f4c3d
+NAME           : Water bottle
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : water bottle a metal bottle to store your liquids. [{"name": "drink", "slug": "drink", "uri": "https://api.sketchfab.com/v3/tags/drink"}, {"name": "color", "slug": "color", "uri": "https://api.sketchfab.com/v3/tags/color"}, {"name": "metal", "slug": "metal", "uri": "https://api.sketchfab.com/v3/tags
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 8
+CLASS          : plastic
+MATCHED PHRASE : water bottle
+UID            : f5dd9fee10854a3d8288602c32714592
+NAME           : Old sports water bottle
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : old sports water bottle file .blend textures in 2048 px pbr the roughness of the sucker must go in the transmission roughness (blender principal bsdf) [{"name": "food", "slug": "food", "uri": "https://api.sketchfab.com/v3/tags/food"}, {"name": "water", "slug": "water", "uri": "https://api.sketchfab.
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 9
+CLASS          : plastic
+MATCHED PHRASE : water bottle
+UID            : 910cf7e424e6433abc8a7763bcf9f323
+NAME           : Water Bottle Simple Textures
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : water bottle simple textures a 3d model of my water bottle with simple textures. i will be creating a second version with more complex materials soon. [] [] by 910cf7e424e6433abc8a7763bcf9f323
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 10
+CLASS          : plastic
+MATCHED PHRASE : milk bottle
+UID            : 5d2fa3a3260d4a4d96165c4b29880e24
+NAME           : A milk bottle.
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : a milk bottle. just an oldfashioned milk bottle from the times of the ussr. [{"name": "soviet", "slug": "soviet", "uri": "https://api.sketchfab.com/v3/tags/soviet"}, {"name": "cccp", "slug": "cccp", "uri": "https://api.sketchfab.com/v3/tags/cccp"}, {"name": "milk", "slug": "milk", "uri": "https://ap
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 11
+CLASS          : plastic
+MATCHED PHRASE : water bottle
+UID            : fdc859edc8274342ba00a47f84c148d9
+NAME           : Plastic Water Bottle
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : plastic water bottle an accurately scaled plastic water bottle. [{"name": "water", "slug": "water", "uri": "https://api.sketchfab.com/v3/tags/water"}, {"name": "bottles", "slug": "bottles", "uri": "https://api.sketchfab.com/v3/tags/bottles"}, {"name": "plastic-bottle", "slug": "plastic-bottle", "uri
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 12
+CLASS          : plastic
+MATCHED PHRASE : plastic bottle
+UID            : 777574aecc7641f4a8b93da376a5d1be
+NAME           : Plastic Bottle
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : plastic bottle this is the model i made for the application of small studio, they wanted a real life referenced plastic bottle model so i made it for practice. there is only high poly model and no textures. i suggest to use matcap while you are checking the model. download and use however you like [
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 13
+CLASS          : plastic
+MATCHED PHRASE : water bottle
+UID            : 5df5ba30d0794a62944583a21e73353c
+NAME           : Water Bottle
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : water bottle [] [] by 5df5ba30d0794a62944583a21e73353c
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 14
+CLASS          : plastic
+MATCHED PHRASE : water bottle
+UID            : c002e2aa017d49ae8e6dbd295cca3914
+NAME           : Water Bottle
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : water bottle a simple water bottle. [] [{"name": "electronics-gadgets"}] by c002e2aa017d49ae8e6dbd295cca3914
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 15
+CLASS          : plastic
+MATCHED PHRASE : water bottle
+UID            : b7ad81c62950477883d3c2e1e2c12287
+NAME           : Object3 - Water Bottle
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : object3 - water bottle [] [] by b7ad81c62950477883d3c2e1e2c12287
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 16
+CLASS          : plastic
+MATCHED PHRASE : water bottle
+UID            : a98ac207474c476f80be6e768315be1e
+NAME           : Water Bottle - TinkerCad
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : water bottle - tinkercad [] [] by a98ac207474c476f80be6e768315be1e
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 17
+CLASS          : plastic
+MATCHED PHRASE : water bottle
+UID            : 7c5a28b71605458f8b99f3ec4cb0d798
+NAME           : Water Bottle Textured (Grip & Leaf Pattern)
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : water bottle textured (grip & leaf pattern) [{"name": "water", "slug": "water", "uri": "https://api.sketchfab.com/v3/tags/water"}, {"name": "bottles", "slug": "bottles", "uri": "https://api.sketchfab.com/v3/tags/bottles"}, {"name": "bottle", "slug": "bottle", "uri": "https://api.sketchfab.com/v3/tag
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 18
+CLASS          : plastic
+MATCHED PHRASE : water bottle
+UID            : 2f86b914dd44474f8c3945b002137b0e
+NAME           : Nike Water Bottle
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : nike water bottle water bottle, hydroflask style, spill [{"name": "water", "slug": "water", "uri": "https://api.sketchfab.com/v3/tags/water"}, {"name": "bottle", "slug": "bottle", "uri": "https://api.sketchfab.com/v3/tags/bottle"}, {"name": "hydroflask", "slug": "hydroflask", "uri": "https://api.ske
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 19
+CLASS          : plastic
+MATCHED PHRASE : plastic cup
+UID            : 0e7f5ccb3d2c4177b806a67cb9fc5107
+NAME           : Low Poly Plastic Cup
+LICENSE        : by-sa
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : low poly plastic cup [{"name": "plasticcup", "slug": "plasticcup", "uri": "https://api.sketchfab.com/v3/tags/plasticcup"}, {"name": "lowpoly", "slug": "lowpoly", "uri": "https://api.sketchfab.com/v3/tags/lowpoly"}, {"name": "cup", "slug": "cup", "uri": "https://api.sketchfab.com/v3/tags/cup"}, {"nam
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 20
+CLASS          : plastic
+MATCHED PHRASE : soda bottle
+UID            : c2ed3556af1f48a5a7e7f2f60ccda646
+NAME           : Soda Bottle
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : soda bottle cola drink bottle [{"name": "drink", "slug": "drink", "uri": "https://api.sketchfab.com/v3/tags/drink"}, {"name": "cola", "slug": "cola", "uri": "https://api.sketchfab.com/v3/tags/cola"}, {"name": "coke", "slug": "coke", "uri": "https://api.sketchfab.com/v3/tags/coke"}, {"name": "soda",
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 21
+CLASS          : plastic
+MATCHED PHRASE : plastic bag
+UID            : e51f0e4320f84bd194041bb59c72066a
+NAME           : Plastic Bag Dirty 2
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : plastic bag dirty 2 [{"name": "substancepainter", "slug": "substancepainter", "uri": "https://api.sketchfab.com/v3/tags/substancepainter"}, {"name": "substance", "slug": "substance", "uri": "https://api.sketchfab.com/v3/tags/substance"}] [] by e51f0e4320f84bd194041bb59c72066a
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 22
+CLASS          : plastic
+MATCHED PHRASE : plastic bag
+UID            : 1a4bbf8e4ee4421e9a029d399e5c9746
+NAME           : Plastic Bag Dirty 3
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : plastic bag dirty 3 [{"name": "substancepainter", "slug": "substancepainter", "uri": "https://api.sketchfab.com/v3/tags/substancepainter"}, {"name": "substance", "slug": "substance", "uri": "https://api.sketchfab.com/v3/tags/substance"}] [] by 1a4bbf8e4ee4421e9a029d399e5c9746
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 23
+CLASS          : plastic
+MATCHED PHRASE : water bottle
+UID            : 095b27cd328048439d6967c4d0f0a759
+NAME           : Water Bottle
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : water bottle this model was created for the modelling in 3d assignment, and is uploaded in .obj file format. [] [{"name": "food-drink"}] by 095b27cd328048439d6967c4d0f0a759
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 24
+CLASS          : plastic
+MATCHED PHRASE : plastic bottle
+UID            : 6f10ebe5d0c2423da325757c296653d3
+NAME           : Plastic Bottle
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : plastic bottle a plastic water bottle [{"name": "plasticbottle", "slug": "plasticbottle", "uri": "https://api.sketchfab.com/v3/tags/plasticbottle"}, {"name": "waterbottle", "slug": "waterbottle", "uri": "https://api.sketchfab.com/v3/tags/waterbottle"}, {"name": "bottle", "slug": "bottle", "uri": "ht
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 25
+CLASS          : plastic
+MATCHED PHRASE : pet bottle
+UID            : 90e93d94cb2a4a09bedd0c90ffcae40a
+NAME           : Face Shield - Open Source - v.5.2
+LICENSE        : by-sa
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : face shield - open source - v.5.2 open source, 3d printed face shields, that require no tools and no elastic band for assembly. all you need is a transparent sheet - can be a binding sheet or even cut-out pet bottle and any string or band. takes a4/a3 or letter sized sheets, self-tightening and clip
+

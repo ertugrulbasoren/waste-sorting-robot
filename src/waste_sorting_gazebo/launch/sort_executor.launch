@@ -1,56 +1,78 @@
 <launch>
   <!--
-    Starts the Gazebo sorting executor.
+    Sort executor launch.
 
-    Input:
+    This node listens to:
       /waste/pick_event
 
-    Action:
-      Moves the detected Gazebo model to the correct class bin.
+    Then moves the detected Gazebo model into the correct bin.
+
+    Final bin mapping:
+
+      metal   -> red bin
+      paper   -> blue bin
+      glass   -> green bin
+      plastic -> yellow bin
+
+    Real Gazebo bin coordinates measured with /gazebo/get_model_state:
+
+      trash_bin_red     : x=1.5, y=-0.90, z=0.15
+      trash_bin_blue    : x=1.5, y=-0.45, z=0.15
+      trash_bin_green   : x=1.5, y= 0.00, z=0.15
+      trash_bin_yellow  : x=1.5, y= 0.45, z=0.15
   -->
 
   <arg name="pick_event_topic" default="/waste/pick_event"/>
 
-  <!-- Bin positions in Gazebo world coordinates.
-       These may be tuned after checking the current world file. -->
-  <arg name="glass_bin_x" default="1.50"/>
-  <arg name="glass_bin_y" default="-0.60"/>
+  <!-- Drop height for realistic OBJ assets.
+       If objects look embedded in bins, increase to 0.22.
+       If objects float too high, decrease to 0.17. -->
+  <arg name="drop_z" default="0.20"/>
 
-  <arg name="metal_bin_x" default="1.50"/>
-  <arg name="metal_bin_y" default="-0.20"/>
-
-  <arg name="paper_bin_x" default="1.50"/>
-  <arg name="paper_bin_y" default="0.20"/>
-
-  <arg name="plastic_bin_x" default="1.50"/>
-  <arg name="plastic_bin_y" default="0.60"/>
-
-  <arg name="drop_z" default="0.35"/>
+  <!-- Duplicate guard prevents the same track_id from being sorted twice. -->
   <arg name="duplicate_guard_sec" default="5.0"/>
+
+  <!-- Gazebo model lookup timeout. -->
+  <arg name="wait_for_model_timeout_sec" default="1.20"/>
+
+  <!-- Final bin coordinates -->
+  <arg name="metal_bin_x" default="1.5"/>
+  <arg name="metal_bin_y" default="-0.90"/>
+
+  <arg name="paper_bin_x" default="1.5"/>
+  <arg name="paper_bin_y" default="-0.45"/>
+
+  <arg name="glass_bin_x" default="1.5"/>
+  <arg name="glass_bin_y" default="0.00"/>
+
+  <arg name="plastic_bin_x" default="1.5"/>
+  <arg name="plastic_bin_y" default="0.45"/>
 
   <node
     pkg="waste_sorting_gazebo"
     type="sort_executor.py"
     name="sort_executor"
-    output="screen"
-    respawn="true"
-    respawn_delay="2.0">
+    output="screen">
 
     <param name="pick_event_topic" value="$(arg pick_event_topic)"/>
+    <param name="drop_z" value="$(arg drop_z)"/>
+    <param name="duplicate_guard_sec" value="$(arg duplicate_guard_sec)"/>
+    <param name="wait_for_model_timeout_sec" value="$(arg wait_for_model_timeout_sec)"/>
 
-    <param name="glass_bin_x" value="$(arg glass_bin_x)"/>
-    <param name="glass_bin_y" value="$(arg glass_bin_y)"/>
-
+    <!-- metal -> red -->
     <param name="metal_bin_x" value="$(arg metal_bin_x)"/>
     <param name="metal_bin_y" value="$(arg metal_bin_y)"/>
 
+    <!-- paper -> blue -->
     <param name="paper_bin_x" value="$(arg paper_bin_x)"/>
     <param name="paper_bin_y" value="$(arg paper_bin_y)"/>
 
+    <!-- glass -> green -->
+    <param name="glass_bin_x" value="$(arg glass_bin_x)"/>
+    <param name="glass_bin_y" value="$(arg glass_bin_y)"/>
+
+    <!-- plastic -> yellow -->
     <param name="plastic_bin_x" value="$(arg plastic_bin_x)"/>
     <param name="plastic_bin_y" value="$(arg plastic_bin_y)"/>
-
-    <param name="drop_z" value="$(arg drop_z)"/>
-    <param name="duplicate_guard_sec" value="$(arg duplicate_guard_sec)"/>
   </node>
 </launch>

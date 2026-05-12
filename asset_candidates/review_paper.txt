@@ -1,0 +1,284 @@
+====================================================================================================
+OBJAVERSE CANDIDATE REVIEW - PAPER
+====================================================================================================
+
+Review rule:
+  Keep assets that are visually recognizable as paper waste.
+  Avoid irrelevant models, buildings, characters, logos, masks, machines, etc.
+  Prefer licenses: by, cc0, public domain. Be careful with by-nc.
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 1
+CLASS          : paper
+MATCHED PHRASE : newspaper
+UID            : 8bcc57848c6b45f5b2ce1732d5c9d328
+NAME           : HIGH Lentäjän kasvosuojus Cold Weather Face Mask
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : high lentäjän kasvosuojus cold weather face mask yhdysvaltain ilmavoimien d-1a -kasvosuojus. se oli suomalaisen retkikunnan käytössä tutkimusmatkalla, joka tehtiin keväällä 1966 grönlannin jäätikköalueelle. helsingin sanomat oli yksi hankkeen rahoittajista ja lehdessä julkaistiin runsaasti kirjoituk
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 2
+CLASS          : paper
+MATCHED PHRASE : cardboard
+UID            : 0c38a0ddc9ee40269ee606daf63934da
+NAME           : illumina cardboard
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : illumina cardboard [] [] by 0c38a0ddc9ee40269ee606daf63934da
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 3
+CLASS          : paper
+MATCHED PHRASE : cardboard
+UID            : 43e1fac92918420a9d69f8125b9d9328
+NAME           : Arknights Warehouse
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : arknights warehouse **about model** -based off the default decorations in the riic dorms. -low poly models meant as decorations. [{"name": "trolley", "slug": "trolley", "uri": "https://api.sketchfab.com/v3/tags/trolley"}, {"name": "shelf", "slug": "shelf", "uri": "https://api.sketchfab.com/v3/tags/s
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 4
+CLASS          : paper
+MATCHED PHRASE : cardboard
+UID            : ac55cdfa077c430b841fe3b05fbd6f11
+NAME           : (dusty)Cardboard box
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : (dusty)cardboard box here's dusty cardboardbox [{"name": "card", "slug": "card", "uri": "https://api.sketchfab.com/v3/tags/card"}, {"name": "box", "slug": "box", "uri": "https://api.sketchfab.com/v3/tags/box"}] [{"name": "furniture-home"}] by ac55cdfa077c430b841fe3b05fbd6f11
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 5
+CLASS          : paper
+MATCHED PHRASE : cardboard
+UID            : be75b71069a543ada57e38dffa964b46
+NAME           : Cardboard Box (No Copyright, Free For All Use)
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : cardboard box (no copyright, free for all use) a basic cardboard box for games and animations [{"name": "boxes", "slug": "boxes", "uri": "https://api.sketchfab.com/v3/tags/boxes"}, {"name": "random", "slug": "random", "uri": "https://api.sketchfab.com/v3/tags/random"}, {"name": "furniture", "slug":
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 6
+CLASS          : paper
+MATCHED PHRASE : cardboard
+UID            : b260020dab1c4738942cde87ca9b2474
+NAME           : VR Cromo
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : vr cromo vr icono [{"name": "vr", "slug": "vr", "uri": "https://api.sketchfab.com/v3/tags/vr"}, {"name": "cardboard", "slug": "cardboard", "uri": "https://api.sketchfab.com/v3/tags/cardboard"}, {"name": "iconography", "slug": "iconography", "uri": "https://api.sketchfab.com/v3/tags/iconography"}, {"
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 7
+CLASS          : paper
+MATCHED PHRASE : cardboard
+UID            : 7a5ea0249e67402484c305d37fa0da2f
+NAME           : Zivid Boxes - 3D machine vision
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : zivid boxes - 3d machine vision zivid shipping boxes zivid one plus medium is suitable for small to medium objects. the field of view covers typical objects on tables, in standard toes or bins, in picking, assembly, and control applications. * camera model: [zivid one+ medium](http://www.zivid.com/z
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 8
+CLASS          : paper
+MATCHED PHRASE : paper bag
+UID            : df1a677eb14a432ab65331e9234023b9
+NAME           : Paper bag
+LICENSE        : by-nc-sa
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : paper bag created with polycam [{"name": "polycam", "slug": "polycam", "uri": "https://api.sketchfab.com/v3/tags/polycam"}] [] by-nc-sa df1a677eb14a432ab65331e9234023b9
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 9
+CLASS          : paper
+MATCHED PHRASE : newspaper
+UID            : e8263114aabc49beab743ace8840affa
+NAME           : Puzzle Newspaper Cover1
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : puzzle newspaper cover1 [] [] by e8263114aabc49beab743ace8840affa
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 10
+CLASS          : paper
+MATCHED PHRASE : cardboard
+UID            : 4412b693cb0443349ac556023a9c5f15
+NAME           : Cardboard Box
+LICENSE        : by-nc
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : cardboard box a very, very simple cardboard box with not the best texture for it but made for just a dark environment [{"name": "cardboard", "slug": "cardboard", "uri": "https://api.sketchfab.com/v3/tags/cardboard"}, {"name": "box", "slug": "box", "uri": "https://api.sketchfab.com/v3/tags/box"}, {"n
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 11
+CLASS          : paper
+MATCHED PHRASE : cardboard
+UID            : ece545c8149a4305849171d27c8cb28e
+NAME           : Compostable Box .::RAWscan::.
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : compostable box .::rawscan::. compostable box .::rawscan::. photogrammetry scan [{"name": "cardboard", "slug": "cardboard", "uri": "https://api.sketchfab.com/v3/tags/cardboard"}, {"name": "box", "slug": "box", "uri": "https://api.sketchfab.com/v3/tags/box"}, {"name": "photogrammetry", "slug": "photo
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 12
+CLASS          : paper
+MATCHED PHRASE : cardboard
+UID            : 5cb4d0165aea4fecbc84f7400e57082b
+NAME           : Cardboard box
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : cardboard box a cardboard box. free to use. [{"name": "epic", "slug": "epic", "uri": "https://api.sketchfab.com/v3/tags/epic"}, {"name": "box", "slug": "box", "uri": "https://api.sketchfab.com/v3/tags/box"}, {"name": "downloadable", "slug": "downloadable", "uri": "https://api.sketchfab.com/v3/tags/d
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 13
+CLASS          : paper
+MATCHED PHRASE : paper cup
+UID            : 8bafbca3288c471f833ebb8071d55f24
+NAME           : Paper Cup
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : paper cup [] [] by 8bafbca3288c471f833ebb8071d55f24
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 14
+CLASS          : paper
+MATCHED PHRASE : newspaper
+UID            : c4311a0b918643af97904e10c7a34efc
+NAME           : [CC0] Newspaper Stack - Ready to Unity HDRP
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : [cc0] newspaper stack - ready to unity hdrp **totaly free** [cc0 1.0 universal (cc0 1.0) public domain dedication ](https://creativecommons.org/publicdomain/zero/1.0/deed.en) low poly high detailed newspaper stack. all meshes 2132 triangles, textures made with photoshop and xnormal. **ready to unity
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 15
+CLASS          : paper
+MATCHED PHRASE : newspaper
+UID            : 8445d7c3a16d43d1837bc8a07ab82d0a
+NAME           : Puesto De Diario
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : puesto de diario puesto de diarios. hecho en [blender♥](https://www.blender.org/) [{"name": "newspaper", "slug": "newspaper", "uri": "https://api.sketchfab.com/v3/tags/newspaper"}, {"name": "shop", "slug": "shop", "uri": "https://api.sketchfab.com/v3/tags/shop"}] [{"name": "places-travel"}] by 8445d
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 16
+CLASS          : paper
+MATCHED PHRASE : cardboard
+UID            : 63a4f11f28874cb687bc0d7e10881364
+NAME           : cardboard campground
+LICENSE        : by-sa
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : cardboard campground a cardboard campground [{"name": "3dlivescanner", "slug": "3dlivescanner", "uri": "https://api.sketchfab.com/v3/tags/3dlivescanner"}, {"name": "scanned_by_samsung_sm-g996u", "slug": "scanned_by_samsung_sm-g996u", "uri": "https://api.sketchfab.com/v3/tags/scanned_by_samsung_sm-g9
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 17
+CLASS          : paper
+MATCHED PHRASE : cardboard
+UID            : 390e8201432a4ef3813316953cacee95
+NAME           : Cardboard box
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : cardboard box low poly cardboard box. made in blander. [{"name": "cardboard", "slug": "cardboard", "uri": "https://api.sketchfab.com/v3/tags/cardboard"}, {"name": "box", "slug": "box", "uri": "https://api.sketchfab.com/v3/tags/box"}, {"name": "cardbox", "slug": "cardbox", "uri": "https://api.sketchf
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 18
+CLASS          : paper
+MATCHED PHRASE : cardboard
+UID            : 2812b03176ba47afb9b1aade71081014
+NAME           : Packaging from Piotr Mikolasch’s pharmacy
+LICENSE        : cc0
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : packaging from piotr mikolasch’s pharmacy packaging from piotr mikolasch’s pharmacy in lviv id no.: kgz 6822/31 museum: the museum of pharmacy at the jagiellonian university medical college in kraków https://muzea.malopolska.pl/en/objects-list/1709 digitalisation: rdw mic, virtual małopolska project
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 19
+CLASS          : paper
+MATCHED PHRASE : cardboard
+UID            : 48181e8dec5a4505950e797aec69eeec
+NAME           : Mon Komo OBJ
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : mon komo obj monkomo 3dre cardboard [{"name": "3dre", "slug": "3dre", "uri": "https://api.sketchfab.com/v3/tags/3dre"}] [{"name": "science-technology"}] by 48181e8dec5a4505950e797aec69eeec
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 20
+CLASS          : paper
+MATCHED PHRASE : cardboard
+UID            : 54fa3f6d3c144e9b9d36489b9b1b33ef
+NAME           : Packaging for Kefir Grains
+LICENSE        : cc0
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : packaging for kefir grains the box for chulamski’s kefir grains, along with the raw material in it, comes from the “pod gwiazdą” [“the star”] pharmacy in lwów, which was owned by piotr mikolasch. the box contains dry kefir grains (lat. dispora caucasica), from which one could prepare kefir. the grai
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 21
+CLASS          : paper
+MATCHED PHRASE : cardboard
+UID            : e2e92612fd1449888305f157eb71b904
+NAME           : Cardboard pieces
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : cardboard pieces [{"name": "cardboard", "slug": "cardboard", "uri": "https://api.sketchfab.com/v3/tags/cardboard"}, {"name": "handpainted", "slug": "handpainted", "uri": "https://api.sketchfab.com/v3/tags/handpainted"}] [{"name": "furniture-home"}] by e2e92612fd1449888305f157eb71b904
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 22
+CLASS          : paper
+MATCHED PHRASE : newspaper
+UID            : ce07b470feba4678be06085e4839fc89
+NAME           : 13-Pocket Wall newspaper panel
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : 13-pocket wall newspaper panel [] [] by ce07b470feba4678be06085e4839fc89
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 23
+CLASS          : paper
+MATCHED PHRASE : newspaper
+UID            : 7ea6582daadd4d6f9c685b5d1de07fa7
+NAME           : Bolete 2
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : bolete 2 another attempt at photoscanning, this time using a screen base, a glass, some newspaper and the arm from an electric mixer as a makeshift stand. (this in an attempt to replicate mrrat's setup from here: https://sketchfab.com/models/893d995dbca74a6280016c25c0f043e4) meshroom for the photosc
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 24
+CLASS          : paper
+MATCHED PHRASE : newspaper
+UID            : e9c428ceeee6415599715bfc8a145405
+NAME           : Dark magazine
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : dark magazine [{"name": "news", "slug": "news", "uri": "https://api.sketchfab.com/v3/tags/news"}, {"name": "magazine", "slug": "magazine", "uri": "https://api.sketchfab.com/v3/tags/magazine"}, {"name": "newspaper", "slug": "newspaper", "uri": "https://api.sketchfab.com/v3/tags/newspaper"}, {"name":
+
+----------------------------------------------------------------------------------------------------
+INDEX          : 25
+CLASS          : paper
+MATCHED PHRASE : cardboard
+UID            : df29f653b40e46018715452bd8d5e6e7
+NAME           : Pizza Box
+LICENSE        : by
+SOURCE         : 
+URL/FILE ID    : 
+PREVIEW        : pizza box low poly box from dodo pizza. 4k jpg texture - - most of my models are free, so you can support my work, link in profile. or just hit like⭐ [{"name": "food", "slug": "food", "uri": "https://api.sketchfab.com/v3/tags/food"}, {"name": "dodo", "slug": "dodo", "uri": "https://api.sketchfab.com
+
