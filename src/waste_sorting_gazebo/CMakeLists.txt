@@ -98,6 +98,7 @@ catkin_install_python(
     scripts/trial_logger.py
     scripts/analyze_trial_results.py
     scripts/generate_realistic_waste_meshes.py
+    scripts/prepare_realistic_assets.py
     scripts/spawn_realistic_waste.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
