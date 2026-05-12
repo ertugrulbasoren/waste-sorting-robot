@@ -1,0 +1,56 @@
+<launch>
+  <!--
+    Full dataset-driven autonomous waste sorting system.
+
+    This mode feeds YOLO with real dataset images instead of the raw Gazebo camera.
+    Gazebo still runs for bins, conveyor, and executor model sorting.
+  -->
+
+  <arg name="gui" default="true"/>
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+
+  <arg name="model_path" default="$(find waste_sorting_gazebo)/models_yolo/best.pt"/>
+  <arg name="conf_threshold" default="0.25"/>
+  <arg name="iou_threshold" default="0.45"/>
+  <arg name="device" default="cpu"/>
+
+  <include file="$(find waste_sorting_gazebo)/launch/sim.launch">
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+  </include>
+
+  <include file="$(find waste_sorting_gazebo)/launch/dataset_camera.launch">
+    <arg name="image_topic" value="/dataset_camera/image_raw"/>
+    <arg name="split" value="valid"/>
+    <arg name="fps" value="10.0"/>
+  </include>
+
+  <include file="$(find waste_sorting_gazebo)/launch/yolo_detector.launch">
+    <arg name="image_topic" value="/dataset_camera/image_raw"/>
+    <arg name="model_path" value="$(arg model_path)"/>
+    <arg name="conf_threshold" value="$(arg conf_threshold)"/>
+    <arg name="iou_threshold" value="$(arg iou_threshold)"/>
+    <arg name="device" value="$(arg device)"/>
+    <arg name="publish_annotated" value="true"/>
+  </include>
+
+  <include file="$(find waste_sorting_gazebo)/launch/tracker.launch">
+    <arg name="detections_topic" value="/waste/detections"/>
+    <arg name="legacy_detection_topic" value="/waste/detection"/>
+    <arg name="tracked_topic" value="/waste/tracked_detection"/>
+    <arg name="pick_event_topic" value="/waste/pick_event"/>
+
+    <arg name="pick_line_y" value="330"/>
+    <arg name="pick_tolerance_px" value="80"/>
+    <arg name="min_confirmed_hits" value="2"/>
+    <arg name="max_match_distance_px" value="140.0"/>
+    <arg name="max_track_age_sec" value="1.5"/>
+    <arg name="cooldown_sec" value="1.5"/>
+  </include>
+
+  <include file="$(find waste_sorting_gazebo)/launch/sort_executor.launch">
+    <arg name="pick_event_topic" value="/waste/pick_event"/>
+  </include>
+</launch>

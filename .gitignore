@@ -5,3 +5,21 @@ logs/
 __pycache__/
 *.log
 .DS_Store
+
+# Runtime generated Gazebo dataset textures/models
+src/waste_sorting_gazebo/generated_dataset_models/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Backup files
+*.bak
+
+# ROS runtime logs
+logs/
+.ros/
+
+# Catkin build artifacts
+build/
+devel/

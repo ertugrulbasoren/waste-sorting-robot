@@ -1,13 +1,36 @@
 <launch>
-  <env name="PYTHONPATH" value="/home/ertugrulbasoren/.local/lib/python3.8/site-packages:$(optenv PYTHONPATH)" />
+  <!--
+    Starts the YOLOv8 detector node.
 
-  <node pkg="waste_sorting_gazebo"
-        type="yolo_detector.py"
-        name="yolo_detector"
-        output="screen">
-    <param name="image_topic" value="/top_camera/image_raw" />
-    <param name="model_path" value="/home/ertugrulbasoren/waste-sorting-robot-project/src/waste_sorting_gazebo/models_yolo/best.pt" />
-    <param name="conf_threshold" value="0.25" />
-    <param name="publish_annotated" value="true" />
+    It subscribes:
+      /top_camera/image_raw
+
+    It publishes:
+      /waste/detection
+      /waste/detections
+      /waste/detection_image
+  -->
+
+  <arg name="image_topic" default="/top_camera/image_raw"/>
+  <arg name="model_path" default="$(find waste_sorting_gazebo)/models_yolo/best.pt"/>
+  <arg name="conf_threshold" default="0.25"/>
+  <arg name="iou_threshold" default="0.45"/>
+  <arg name="publish_annotated" default="true"/>
+  <arg name="device" default="cpu"/>
+
+  <node
+    pkg="waste_sorting_gazebo"
+    type="yolo_detector.py"
+    name="yolo_detector"
+    output="screen"
+    respawn="true"
+    respawn_delay="2.0">
+
+    <param name="image_topic" value="$(arg image_topic)"/>
+    <param name="model_path" value="$(arg model_path)"/>
+    <param name="conf_threshold" value="$(arg conf_threshold)"/>
+    <param name="iou_threshold" value="$(arg iou_threshold)"/>
+    <param name="publish_annotated" value="$(arg publish_annotated)"/>
+    <param name="device" value="$(arg device)"/>
   </node>
 </launch>

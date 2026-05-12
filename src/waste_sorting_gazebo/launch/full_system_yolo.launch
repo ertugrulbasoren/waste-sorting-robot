@@ -1,0 +1,50 @@
+<launch>
+  <!--
+    Full autonomous YOLO-based waste sorting system.
+
+    Starts:
+      1. Gazebo simulation
+      2. YOLO detector
+      3. Tracker
+      4. Sort executor
+
+    Usage:
+      roslaunch waste_sorting_gazebo full_system_yolo.launch
+  -->
+
+  <arg name="gui" default="true"/>
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+
+  <arg name="image_topic" default="/top_camera/image_raw"/>
+  <arg name="model_path" default="$(find waste_sorting_gazebo)/models_yolo/best.pt"/>
+  <arg name="conf_threshold" default="0.25"/>
+  <arg name="iou_threshold" default="0.45"/>
+  <arg name="device" default="cpu"/>
+
+  <include file="$(find waste_sorting_gazebo)/launch/sim.launch">
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+  </include>
+
+  <include file="$(find waste_sorting_gazebo)/launch/yolo_detector.launch">
+    <arg name="image_topic" value="$(arg image_topic)"/>
+    <arg name="model_path" value="$(arg model_path)"/>
+    <arg name="conf_threshold" value="$(arg conf_threshold)"/>
+    <arg name="iou_threshold" value="$(arg iou_threshold)"/>
+    <arg name="device" value="$(arg device)"/>
+    <arg name="publish_annotated" value="true"/>
+  </include>
+
+  <include file="$(find waste_sorting_gazebo)/launch/tracker.launch">
+    <arg name="detections_topic" value="/waste/detections"/>
+    <arg name="legacy_detection_topic" value="/waste/detection"/>
+    <arg name="tracked_topic" value="/waste/tracked_detection"/>
+    <arg name="pick_event_topic" value="/waste/pick_event"/>
+  </include>
+
+  <include file="$(find waste_sorting_gazebo)/launch/sort_executor.launch">
+    <arg name="pick_event_topic" value="/waste/pick_event"/>
+  </include>
+</launch>

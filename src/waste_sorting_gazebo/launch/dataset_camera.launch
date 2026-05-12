@@ -1,0 +1,43 @@
+<launch>
+  <!-- Publishes synthetic camera frames using real waste dataset crops. -->
+
+  <arg name="dataset_root" default="$(find waste_sorting_gazebo)/../../datasets/waste_4class/waste_dataset"/>
+  <arg name="split" default="valid"/>
+  <arg name="image_topic" default="/dataset_camera/image_raw"/>
+  <arg name="fps" default="10.0"/>
+
+  <node
+    pkg="waste_sorting_gazebo"
+    type="dataset_camera_feeder.py"
+    name="dataset_camera_feeder"
+    output="screen"
+    respawn="true"
+    respawn_delay="2.0">
+
+    <param name="dataset_root" value="$(arg dataset_root)"/>
+    <param name="split" value="$(arg split)"/>
+    <param name="image_topic" value="$(arg image_topic)"/>
+    <param name="fps" value="$(arg fps)"/>
+
+    <param name="width" value="640"/>
+    <param name="height" value="480"/>
+    <param name="frames_per_object" value="45"/>
+    <param name="object_width_px" value="260"/>
+    <param name="start_y" value="100"/>
+    <param name="end_y" value="355"/>
+    <param name="object_center_x" value="320"/>
+
+    <param name="spawn_gazebo_model" value="true"/>
+    <param name="delete_existing" value="true"/>
+
+    <param name="texture_root" value="$(find waste_sorting_gazebo)/generated_dataset_models"/>
+
+    <param name="gazebo_spawn_x" value="-0.45"/>
+    <param name="gazebo_spawn_y" value="0.0"/>
+    <param name="gazebo_spawn_z" value="0.18"/>
+
+    <param name="proxy_size_x" value="0.55"/>
+    <param name="proxy_size_y" value="0.38"/>
+    <param name="proxy_size_z" value="0.018"/>
+  </node>
+</launch>

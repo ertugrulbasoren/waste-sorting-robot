@@ -1,6 +1,56 @@
 <launch>
-  <node pkg="waste_sorting_gazebo"
-        type="sort_executor.py"
-        name="sort_executor"
-        output="screen" />
+  <!--
+    Starts the Gazebo sorting executor.
+
+    Input:
+      /waste/pick_event
+
+    Action:
+      Moves the detected Gazebo model to the correct class bin.
+  -->
+
+  <arg name="pick_event_topic" default="/waste/pick_event"/>
+
+  <!-- Bin positions in Gazebo world coordinates.
+       These may be tuned after checking the current world file. -->
+  <arg name="glass_bin_x" default="1.50"/>
+  <arg name="glass_bin_y" default="-0.60"/>
+
+  <arg name="metal_bin_x" default="1.50"/>
+  <arg name="metal_bin_y" default="-0.20"/>
+
+  <arg name="paper_bin_x" default="1.50"/>
+  <arg name="paper_bin_y" default="0.20"/>
+
+  <arg name="plastic_bin_x" default="1.50"/>
+  <arg name="plastic_bin_y" default="0.60"/>
+
+  <arg name="drop_z" default="0.35"/>
+  <arg name="duplicate_guard_sec" default="5.0"/>
+
+  <node
+    pkg="waste_sorting_gazebo"
+    type="sort_executor.py"
+    name="sort_executor"
+    output="screen"
+    respawn="true"
+    respawn_delay="2.0">
+
+    <param name="pick_event_topic" value="$(arg pick_event_topic)"/>
+
+    <param name="glass_bin_x" value="$(arg glass_bin_x)"/>
+    <param name="glass_bin_y" value="$(arg glass_bin_y)"/>
+
+    <param name="metal_bin_x" value="$(arg metal_bin_x)"/>
+    <param name="metal_bin_y" value="$(arg metal_bin_y)"/>
+
+    <param name="paper_bin_x" value="$(arg paper_bin_x)"/>
+    <param name="paper_bin_y" value="$(arg paper_bin_y)"/>
+
+    <param name="plastic_bin_x" value="$(arg plastic_bin_x)"/>
+    <param name="plastic_bin_y" value="$(arg plastic_bin_y)"/>
+
+    <param name="drop_z" value="$(arg drop_z)"/>
+    <param name="duplicate_guard_sec" value="$(arg duplicate_guard_sec)"/>
+  </node>
 </launch>

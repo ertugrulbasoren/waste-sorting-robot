@@ -1,29 +1,35 @@
 <launch>
-<!-- <rosparam file="$(find waste_robot_moveit_config)/config/gazebo_pids.yaml" command="load"/> -->
-  <!-- 1. Boş dünyayı ve senin özel dünyanı başlatır -->
+  <!--
+    Starts the Gazebo simulation world for the waste sorting robot.
+
+    Usage:
+      roslaunch waste_sorting_gazebo sim.launch
+
+    Arguments:
+      gui:=true/false
+      paused:=false/true
+      use_sim_time:=true/false
+      world:=path_to_world_file
+  -->
+
+  <arg name="gui" default="true"/>
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="world" default="$(find waste_sorting_gazebo)/worlds/waste_sorting.world"/>
+
+  <param name="/use_sim_time" value="$(arg use_sim_time)"/>
+
+  <!-- Make Gazebo able to find models and plugins from this package -->
+  <env name="GAZEBO_MODEL_PATH" value="$(find waste_sorting_gazebo)/models:$(optenv GAZEBO_MODEL_PATH)"/>
+  <env name="GAZEBO_PLUGIN_PATH" value="$(find waste_sorting_gazebo)/../../devel/lib:$(optenv GAZEBO_PLUGIN_PATH)"/>
+
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find waste_sorting_gazebo)/worlds/waste_sorting.world" />
-    <arg name="paused" value="false" />
-    <arg name="use_sim_time" value="true" />
-    <arg name="gui" value="true" />
-    <arg name="headless" value="false" />
-    <arg name="debug" value="false" />
+    <arg name="world_name" value="$(arg world)"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+    <arg name="verbose" value="false"/>
   </include>
-
-  <!-- 2. Robotun URDF dosyasını sisteme tanıtır -->
-  <param name="robot_description" textfile="$(find waste_sorting_description)/urdf/waste_robot.urdf" />
-
-  <!-- 3. Robotu Gazebo'da istediğin koordinatta oluşturur -->
-  <!-- -x, -y, -z değerlerini robotun konveyöre olan uzaklığına göre değiştirebilirsin -->
-  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" 
-        args="-param robot_description -urdf -model waste_robot -x -0.50 -y -0.65 -z 0.0"
-        output="screen" />
-        <!-- 4. Robot eklem controllerlarını yükler -->
-<!-- <rosparam file="$(find waste_robot_moveit_config)/config/ros_controllers.yaml" command="load"/> -->
-
-<!--
-<node name="controller_spawner" pkg="controller_manager" type="spawner"
-      args="joint_state_controller arm_controller"
-      output="screen" />
--->
 </launch>

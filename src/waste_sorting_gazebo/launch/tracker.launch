@@ -1,11 +1,57 @@
 <launch>
-  <node pkg="waste_sorting_gazebo"
-        type="tracker_node.py"
-        name="tracker_node"
-        output="screen">
-    <param name="max_distance" value="80" />
-    <param name="track_timeout" value="0.8" />
-    <param name="pick_line_y" value="210" />
-    <param name="pick_tolerance" value="18" />
+  <!--
+    Starts the deterministic multi-object tracker.
+
+    Preferred input:
+      /waste/detections
+
+    Compatibility input:
+      /waste/detection
+
+    Outputs:
+      /waste/tracked_detection
+      /waste/pick_event
+  -->
+
+  <arg name="detections_topic" default="/waste/detections"/>
+  <arg name="legacy_detection_topic" default="/waste/detection"/>
+  <arg name="tracked_topic" default="/waste/tracked_detection"/>
+  <arg name="pick_event_topic" default="/waste/pick_event"/>
+
+  <!-- Image-space tracking parameters -->
+  <arg name="max_match_distance_px" default="90.0"/>
+  <arg name="max_track_age_sec" default="1.2"/>
+  <arg name="min_confirmed_hits" default="3"/>
+
+  <!-- Pick line in image pixels.
+       For a 640x480 top camera, center_y around 300-360 is usually reasonable.
+       We will tune this after observing /waste/detection_image. -->
+  <arg name="pick_line_y" default="330"/>
+  <arg name="pick_tolerance_px" default="35"/>
+
+  <!-- Stable trigger rule:
+       Track must cross or enter the pick zone only once. -->
+  <arg name="cooldown_sec" default="2.0"/>
+
+  <node
+    pkg="waste_sorting_gazebo"
+    type="tracker_node.py"
+    name="tracker_node"
+    output="screen"
+    respawn="true"
+    respawn_delay="2.0">
+
+    <param name="detections_topic" value="$(arg detections_topic)"/>
+    <param name="legacy_detection_topic" value="$(arg legacy_detection_topic)"/>
+    <param name="tracked_topic" value="$(arg tracked_topic)"/>
+    <param name="pick_event_topic" value="$(arg pick_event_topic)"/>
+
+    <param name="max_match_distance_px" value="$(arg max_match_distance_px)"/>
+    <param name="max_track_age_sec" value="$(arg max_track_age_sec)"/>
+    <param name="min_confirmed_hits" value="$(arg min_confirmed_hits)"/>
+
+    <param name="pick_line_y" value="$(arg pick_line_y)"/>
+    <param name="pick_tolerance_px" value="$(arg pick_tolerance_px)"/>
+    <param name="cooldown_sec" value="$(arg cooldown_sec)"/>
   </node>
 </launch>

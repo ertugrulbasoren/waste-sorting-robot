@@ -9,23 +9,32 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   sensor_msgs
   geometry_msgs
-  gazebo_ros
   gazebo_msgs
-  cv_bridge
   message_generation
+  cv_bridge
+  image_transport
 )
 
 find_package(gazebo REQUIRED)
 
+################################################
+## ROS messages
+################################################
+
 add_message_files(
   FILES
   Detection2D.msg
+  Detection2DArray.msg
 )
 
 generate_messages(
   DEPENDENCIES
   std_msgs
 )
+
+################################################
+## Catkin package
+################################################
 
 catkin_package(
   CATKIN_DEPENDS
@@ -34,25 +43,36 @@ catkin_package(
     std_msgs
     sensor_msgs
     geometry_msgs
-    gazebo_ros
     gazebo_msgs
-    cv_bridge
     message_runtime
+    cv_bridge
+    image_transport
+  INCLUDE_DIRS
+  LIBRARIES conveyor_motion_plugin
 )
+
+################################################
+## Include directories
+################################################
 
 include_directories(
   ${catkin_INCLUDE_DIRS}
   ${GAZEBO_INCLUDE_DIRS}
 )
 
-link_directories(${GAZEBO_LIBRARY_DIRS})
+link_directories(
+  ${GAZEBO_LIBRARY_DIRS}
+)
 
-add_library(conveyor_motion_plugin SHARED
+################################################
+## Gazebo conveyor plugin
+################################################
+
+add_library(conveyor_motion_plugin
   plugins/conveyor_motion_plugin.cpp
 )
 
 add_dependencies(conveyor_motion_plugin
-  ${${PROJECT_NAME}_EXPORTED_TARGETS}
   ${catkin_EXPORTED_TARGETS}
 )
 
@@ -61,18 +81,29 @@ target_link_libraries(conveyor_motion_plugin
   ${GAZEBO_LIBRARIES}
 )
 
-catkin_install_python(PROGRAMS
-  scripts/spawn_trash.py
-  scripts/spawn_sequence.py
-  scripts/sim_detector.py
-  scripts/yolo_detector.py
-  scripts/tracker_node.py
-  scripts/sort_executor.py
-  scripts/spawn_simple_arm.py
-  scripts/arm_pick_place.py
+################################################
+## Python scripts
+################################################
+
+catkin_install_python(
+  PROGRAMS
+    scripts/yolo_detector.py
+    scripts/tracker_node.py
+    scripts/sort_executor.py
+    scripts/dataset_camera_feeder.py
+    scripts/spawn_trash.py
+    scripts/spawn_sequence.py
+    scripts/arm_pick_place.py
+    scripts/sim_detector.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
-install(DIRECTORY launch models worlds msg
+################################################
+## Install folders
+################################################
+
+install(
+  DIRECTORY launch worlds models models_yolo
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+  OPTIONAL
 )
