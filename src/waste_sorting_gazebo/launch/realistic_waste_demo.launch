@@ -1,0 +1,94 @@
+<launch>
+  <!--
+    Realistic 3D waste model demo.
+
+    This launch starts Gazebo, spawns four procedural 3D waste models,
+    and starts sort_executor so the models can be sorted through /waste/pick_event.
+
+    Spawned models:
+      waste_plastic_001
+      waste_metal_001
+      waste_paper_001
+      waste_glass_001
+  -->
+
+  <arg name="gui" default="true"/>
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+
+  <!-- Start Gazebo simulation -->
+  <include file="$(find waste_sorting_gazebo)/launch/sim.launch">
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+  </include>
+
+  <!-- Start sort executor for manual pick_event tests -->
+  <include file="$(find waste_sorting_gazebo)/launch/sort_executor.launch">
+    <arg name="pick_event_topic" value="/waste/pick_event"/>
+  </include>
+
+  <!-- Spawn realistic 3D plastic waste -->
+  <node
+    pkg="waste_sorting_gazebo"
+    type="spawn_realistic_waste.py"
+    name="spawn_realistic_plastic"
+    output="screen"
+    respawn="false">
+    <param name="class_name" value="plastic"/>
+    <param name="model_index" value="1"/>
+    <param name="x" value="-0.55"/>
+    <param name="y" value="0.00"/>
+    <param name="z" value="0.22"/>
+    <param name="random_y" value="false"/>
+    <param name="delete_existing" value="true"/>
+  </node>
+
+  <!-- Spawn realistic 3D metal waste -->
+  <node
+    pkg="waste_sorting_gazebo"
+    type="spawn_realistic_waste.py"
+    name="spawn_realistic_metal"
+    output="screen"
+    respawn="false">
+    <param name="class_name" value="metal"/>
+    <param name="model_index" value="1"/>
+    <param name="x" value="-0.35"/>
+    <param name="y" value="0.12"/>
+    <param name="z" value="0.22"/>
+    <param name="random_y" value="false"/>
+    <param name="delete_existing" value="true"/>
+  </node>
+
+  <!-- Spawn realistic 3D paper waste -->
+  <node
+    pkg="waste_sorting_gazebo"
+    type="spawn_realistic_waste.py"
+    name="spawn_realistic_paper"
+    output="screen"
+    respawn="false">
+    <param name="class_name" value="paper"/>
+    <param name="model_index" value="1"/>
+    <param name="x" value="-0.15"/>
+    <param name="y" value="-0.12"/>
+    <param name="z" value="0.22"/>
+    <param name="random_y" value="false"/>
+    <param name="delete_existing" value="true"/>
+  </node>
+
+  <!-- Spawn realistic 3D glass waste -->
+  <node
+    pkg="waste_sorting_gazebo"
+    type="spawn_realistic_waste.py"
+    name="spawn_realistic_glass"
+    output="screen"
+    respawn="false">
+    <param name="class_name" value="glass"/>
+    <param name="model_index" value="1"/>
+    <param name="x" value="0.05"/>
+    <param name="y" value="0.00"/>
+    <param name="z" value="0.22"/>
+    <param name="random_y" value="false"/>
+    <param name="delete_existing" value="true"/>
+  </node>
+</launch>
