@@ -1,56 +1,35 @@
 # Waste Sorting Robot - Run Instructions
 
-This project is an autonomous waste sorting robot simulation built with ROS Noetic, Gazebo Classic, YOLOv8, OpenCV, and Python.
+## 1. Project Overview
 
-The system detects waste objects from a dataset-driven camera stream, tracks them, generates pick events, and moves the corresponding Gazebo object to the correct recycling bin.
+This project is a ROS Noetic and Gazebo based intelligent waste sorting robot simulation.
 
-Supported waste classes:
+The system detects realistic waste objects moving on a conveyor belt using a top camera and YOLO object detection. Detected objects are classified into four classes:
 
 - glass
 - metal
 - paper
 - plastic
 
----
+The detected object is tracked, converted into a pick event, resolved to a Gazebo model name, and then sorted into the correct bin.
 
-## 1. Tested Environment
-
-This project was tested with:
-
-- Ubuntu 20.04.6 LTS
-- ROS Noetic
-- Gazebo Classic 11
-- Python 3
-- OpenCV
-- cv_bridge
-- Ultralytics YOLOv8
-
----
-
-## 2. Repository Structure
-
-Important folders:
+Final pipeline:
 
 ```text
-waste-sorting-robot-project/
-├── datasets/
-│   └── waste_4class/
-│       └── waste_dataset/
-│           ├── data.yaml
-│           ├── train/
-│           │   ├── images/
-│           │   └── labels/
-│           └── valid/
-│               ├── images/
-│               └── labels/
-├── src/
-│   └── waste_sorting_gazebo/
-│       ├── launch/
-│       ├── msg/
-│       ├── scripts/
-│       ├── models_yolo/
-│       ├── worlds/
-│       └── plugins/
-├── build/
-├── devel/
-└── RUN_INSTRUCTIONS.md
+Realistic 3D waste asset
+    ↓
+Conveyor motion
+    ↓
+Top camera image
+    ↓
+YOLO detector
+    ↓
+Tracker
+    ↓
+Pick event
+    ↓
+Pick event model resolver
+    ↓
+Sort executor
+    ↓
+KPI logger and analyzer
