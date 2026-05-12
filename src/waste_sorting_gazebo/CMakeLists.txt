@@ -103,7 +103,9 @@ catkin_install_python(
     scripts/run_realistic_asset_trials.py
     scripts/realistic_conveyor_feeder.py
     scripts/pick_event_model_resolver.py
+    scripts/realistic_yolo_kpi_logger.py
     scripts/realistic_synthetic_dataset_collector.py
+    scripts/analyze_realistic_yolo_kpi.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

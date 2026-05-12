@@ -1,0 +1,25 @@
+{
+  "project_name": "Waste Sorting Robot",
+  "author": {
+    "name": "Ertugrul Basoren",
+    "github": "ertugrulbasoren",
+    "email": "ertugrulbasoren@gmail.com"
+  },
+  "repository": "https://github.com/ertugrulbasoren/waste-sorting-robot",
+  "description": "ROS Noetic and Gazebo based intelligent waste sorting robot simulation using YOLO, realistic Objaverse 3D assets, synthetic dataset generation, tracking, pick-event resolution and sorting executor.",
+  "ownership_note": "This project structure, integration pipeline, ROS/Gazebo implementation, dataset generation workflow and system-level engineering were developed by Ertugrul Basoren for academic graduation project purposes.",
+  "main_components": [
+    "ROS Noetic",
+    "Gazebo Classic",
+    "YOLO waste classification",
+    "Realistic Objaverse 3D asset pipeline",
+    "Synthetic Gazebo dataset collector",
+    "Tracker node",
+    "Pick event model resolver",
+    "Sort executor",
+    "KPI and trial logging"
+  ],
+  "signature": "created-and-integrated-by-ertugrul-basoren",
+  "created_for": "Graduation project / Bitirme projesi",
+  "date_note": "Maintained through Git commit history."
+}
