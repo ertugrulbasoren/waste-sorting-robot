@@ -23,3 +23,6 @@ logs/
 # Catkin build artifacts
 build/
 devel/
+
+# External 3D dataset tools
+external_tools/
