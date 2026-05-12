@@ -1,0 +1,190 @@
+<launch>
+  <!--
+    Full realistic YOLO pipeline with fake robot arm executor.
+
+    Difference from full_system_realistic_yolo.launch:
+      - This launch does NOT start sort_executor.py.
+      - Object sorting is performed by fake_robot_arm_executor.py.
+      - This is the first robot-arm execution architecture step.
+
+    Pipeline:
+      realistic_conveyor_feeder
+        ↓
+      YOLO detector
+        ↓
+      tracker
+        ↓
+      pick_event_model_resolver
+        ↓
+      fake_robot_arm_executor
+        ↓
+      /waste/robot_arm_result
+        ↓
+      realistic_yolo_kpi_logger still evaluates YOLO class accuracy
+  -->
+
+  <arg name="gui" default="true"/>
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+
+  <arg name="model_path" default="$(find waste_sorting_gazebo)/models_yolo/best_realistic_synthetic.pt"/>
+  <arg name="conf_threshold" default="0.25"/>
+
+  <arg name="spawn_interval_sec" default="10.0"/>
+  <arg name="spawn_x" default="-0.75"/>
+  <arg name="spawn_y" default="0.0"/>
+
+  <arg name="object_bottom_z" default="0.145"/>
+  <arg name="visual_lift" default="0.0"/>
+
+  <arg name="end_x" default="0.20"/>
+  <arg name="conveyor_speed" default="0.10"/>
+
+  <arg name="kpi_log_path" default="$(env HOME)/waste-sorting-robot-project/logs/trials/realistic_yolo_kpi.csv"/>
+
+  <arg name="arm_model_name" default="fake_sorting_arm"/>
+  <arg name="arm_x" default="0.55"/>
+  <arg name="arm_y" default="0.85"/>
+  <arg name="arm_z" default="0.00"/>
+  <arg name="arm_yaw" default="-1.5708"/>
+
+  <!-- Gazebo world -->
+  <include file="$(find waste_sorting_gazebo)/launch/sim.launch">
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+  </include>
+
+  <!-- YOLO detector -->
+  <include file="$(find waste_sorting_gazebo)/launch/yolo_detector.launch">
+    <arg name="image_topic" value="/top_camera/image_raw"/>
+    <arg name="model_path" value="$(arg model_path)"/>
+    <arg name="conf_threshold" value="$(arg conf_threshold)"/>
+    <arg name="publish_annotated" value="true"/>
+  </include>
+
+  <!-- Tracker -->
+  <include file="$(find waste_sorting_gazebo)/launch/tracker.launch">
+    <arg name="detections_topic" value="/waste/detections"/>
+    <arg name="legacy_detection_topic" value="/waste/detection"/>
+    <arg name="pick_line_y" value="330.0"/>
+    <arg name="pick_tolerance_px" value="120.0"/>
+    <arg name="min_confirmed_hits" value="4"/>
+  </include>
+
+  <!-- Resolver -->
+  <node
+    pkg="waste_sorting_gazebo"
+    type="pick_event_model_resolver.py"
+    name="pick_event_model_resolver"
+    output="screen"
+    respawn="false">
+
+    <param name="ground_truth_topic" value="/waste/current_ground_truth"/>
+    <param name="input_pick_event_topic" value="/waste/pick_event"/>
+    <param name="output_pick_event_topic" value="/waste/pick_event_resolved"/>
+
+    <param name="min_gt_age_sec" value="3.0"/>
+    <param name="max_gt_age_sec" value="15.0"/>
+
+    <param name="ignore_duplicate_track_ids" value="true"/>
+    <param name="ignore_duplicate_model_names" value="true"/>
+  </node>
+
+  <!-- KPI logger -->
+  <node
+    pkg="waste_sorting_gazebo"
+    type="realistic_yolo_kpi_logger.py"
+    name="realistic_yolo_kpi_logger"
+    output="screen"
+    respawn="false">
+
+    <param name="ground_truth_topic" value="/waste/current_ground_truth"/>
+    <param name="pick_event_topic" value="/waste/pick_event_resolved"/>
+    <param name="log_path" value="$(arg kpi_log_path)"/>
+    <param name="max_gt_age_sec" value="20.0"/>
+    <param name="ignore_duplicate_track_ids" value="true"/>
+    <param name="ignore_duplicate_model_names" value="true"/>
+  </node>
+
+  <!-- Fake visual arm -->
+  <node
+    pkg="waste_sorting_gazebo"
+    type="spawn_fake_robot_arm_visual.py"
+    name="spawn_fake_robot_arm_visual"
+    output="screen"
+    respawn="false">
+
+    <param name="model_name" value="$(arg arm_model_name)"/>
+    <param name="x" value="$(arg arm_x)"/>
+    <param name="y" value="$(arg arm_y)"/>
+    <param name="z" value="$(arg arm_z)"/>
+    <param name="yaw" value="$(arg arm_yaw)"/>
+    <param name="delete_existing" value="true"/>
+  </node>
+
+  <!-- Fake robot arm executor.
+       This replaces sort_executor.py for this launch. -->
+  <node
+    pkg="waste_sorting_gazebo"
+    type="fake_robot_arm_executor.py"
+    name="fake_robot_arm_executor"
+    output="screen"
+    respawn="false">
+
+    <param name="pick_event_topic" value="/waste/pick_event_resolved"/>
+    <param name="result_topic" value="/waste/robot_arm_result"/>
+    <param name="arm_model_name" value="$(arg arm_model_name)"/>
+
+    <param name="pick_delay_sec" value="0.35"/>
+    <param name="grasp_delay_sec" value="0.25"/>
+    <param name="move_delay_sec" value="0.45"/>
+    <param name="place_delay_sec" value="0.25"/>
+
+    <param name="lift_z" value="0.55"/>
+    <param name="drop_z" value="0.20"/>
+
+    <param name="metal_bin_x" value="1.5"/>
+    <param name="metal_bin_y" value="-0.90"/>
+    <param name="paper_bin_x" value="1.5"/>
+    <param name="paper_bin_y" value="-0.45"/>
+    <param name="glass_bin_x" value="1.5"/>
+    <param name="glass_bin_y" value="0.00"/>
+    <param name="plastic_bin_x" value="1.5"/>
+    <param name="plastic_bin_y" value="0.45"/>
+
+    <param name="duplicate_guard_sec" value="5.0"/>
+  </node>
+
+  <!-- Realistic 3D object feeder.
+       It listens to resolved event so it stops conveyor motion after robot arm accepts event. -->
+  <node
+    pkg="waste_sorting_gazebo"
+    type="realistic_conveyor_feeder.py"
+    name="realistic_conveyor_feeder"
+    output="screen"
+    respawn="false">
+
+    <param name="spawn_interval_sec" value="$(arg spawn_interval_sec)"/>
+
+    <param name="spawn_x" value="$(arg spawn_x)"/>
+    <param name="spawn_y" value="$(arg spawn_y)"/>
+
+    <param name="object_bottom_z" value="$(arg object_bottom_z)"/>
+    <param name="visual_lift" value="$(arg visual_lift)"/>
+
+    <param name="end_x" value="$(arg end_x)"/>
+    <param name="conveyor_speed" value="$(arg conveyor_speed)"/>
+
+    <param name="static_model" value="true"/>
+    <param name="delete_before_spawn" value="true"/>
+
+    <param name="random_y" value="false"/>
+    <param name="random_yaw" value="true"/>
+    <param name="class_mode" value="balanced"/>
+
+    <param name="publish_ground_truth" value="true"/>
+    <param name="ground_truth_topic" value="/waste/current_ground_truth"/>
+    <param name="pick_event_topic" value="/waste/pick_event_resolved"/>
+  </node>
+</launch>
